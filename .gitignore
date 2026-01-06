@@ -4,7 +4,7 @@
 # clarification.
 
 # node_modules is a storage folder for Node and
-# can get very large.
+# can get very large and there is no reason to add it to the remote repository.
 node_modules
 
 # .env file is for local use only. It contains
@@ -14,3 +14,9 @@ node_modules
 
 # .DS_Store is only for Mac users
 **/.DS_Store
+
+
+# adding a README.md file to the root of your project
+# is always a good idea, but if you have other
+
+.README.md
