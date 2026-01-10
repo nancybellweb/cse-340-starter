@@ -164,3 +164,23 @@ nav ul li a {
     width: 80%;
   }
 }
+
+#top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.siteName a {
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: #3a3a3a;
+}
+
+#tools a {
+  color: #3a3a3a;
+  text-decoration: none;
+  font-weight: bold;
+}
