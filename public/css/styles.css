@@ -1,6 +1,166 @@
+/**STYLESHEET FOR THE SITE 
+--background color: #ffffff and #3a3a3a
+--border color: #00d1f2
+--font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+**/
 /******* Change Box Model ***************/
 *,
 *:before,
 *:after {
   box-sizing: border-box;
+}
+
+/* --- Global--- */
+* {
+  box-sizing: border-box; 
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-image: url('/images/site/checkerboard.jpg');
+  margin: 0;
+  padding: 20px;
+}
+
+#wrapper {
+  background-color: #ffffff;
+  max-width: 1000px;
+  margin: 0 auto;
+  border: 5px solid #00d1f2; 
+  padding: 15px;
+}
+
+/*--- navigation styles ---*/
+nav {
+  background-color: #3a3a3a;
+  margin: 10px 0;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+nav ul li a {
+  color: #ffffff;
+  text-decoration: none;
+  padding: 10px;
+  display: block;
+  font-weight: bold;
+}
+
+/*----cards styles----*/
+.upgrades-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr; 
+  gap: 15px;
+  text-align: center;
+}
+
+.upgrade-img {
+  background-color: #00d1f2;
+  border: 1px solid #3a3a3a;
+  padding: 10px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upgrade-img img {
+  max-width: 100%;
+  max-height: 100%;
+}
+/**upgrades**/
+
+.upgrades-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr; 
+  gap: 15px;
+  text-align: center;
+}
+
+.upgrade-img {
+  background-color: #00d1f2; 
+  border: 1px solid #3a3a3a;
+  padding: 10px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upgrade-img img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+
+/* --- Desktop Styles (min-width 768px) --- */
+@media screen and (min-width: 768px) {
+  .info-cars {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+  }
+
+  .upgrades-container, .reviews {
+    width: 50%;
+  }
+}
+
+/* --- Hero Section (Mobile First) --- */
+.hero-container {
+    position: relative;
+    display: flex;
+    flex-direction: column; 
+    margin-bottom: 20px;
+}
+
+.hero-details {
+    background-color: rgba(0, 209, 242, 0.8); 
+    padding: 15px;
+    color: #003366;
+}
+
+.hero-details h2 {
+    margin-top: 0;
+    font-size: 1.5rem;
+}
+
+.hero-container img {
+    width: 100%;
+    height: auto;
+    order: 2; 
+}
+
+.own-today-btn {
+    background-color: #00d1f2;
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+}
+
+/* --- Hero Desktop Adjustments --- */
+@media screen and (min-width: 768px) {
+  .hero-details {
+    position: absolute; 
+    top: 50px;
+    left: 50px;
+    width: 250px;
+  }
+  
+  .hero-container img {
+
+    margin-left: auto;
+    display: block;
+    width: 80%;
+  }
 }
