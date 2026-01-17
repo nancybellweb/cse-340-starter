@@ -39,9 +39,4 @@ CREATE TABLE IF NOT EXISTS public.account
 );
 
 
---UPDATE the Inventory table to replace the GM HAMMER from small to huge interiors:
-UPDATE inventory
-SET inv_description = REPLACE(inv_description, 'small interiors', 'a huge interior')
-WHERE inv_make = 'GM'
-AND inv_model = 'Hummer';
 
