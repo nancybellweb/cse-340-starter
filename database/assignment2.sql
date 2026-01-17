@@ -37,3 +37,11 @@ CREATE TABLE IF NOT EXISTS public.account
     account_type account_type NOT NULL DEFAULT 'Client'::account_type,
     CONSTRAINT account_pkey PRIMARY KEY (account_id)
 );
+
+
+--UPDATE the Inventory table to replace the GM HAMMER from small to huge interiors:
+UPDATE inventory
+SET inv_description = REPLACE(inv_description, 'small interiors', 'a huge interior')
+WHERE inv_make = 'GM'
+AND inv_model = 'Hummer';
+
