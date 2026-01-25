@@ -1,9 +1,8 @@
-const utilities = require("../utilities/")
 const baseController = {}
 
 baseController.buildHome = async function(req, res){
-    const nav = await utilities.getNav()
-    res.render("index", {title: "Home", nav})
+  // No need to fetch nav here! It's  in res.locals
+    res.render("index", { title: "Home" }) 
 }
 
 module.exports = baseController

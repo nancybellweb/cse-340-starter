@@ -5,6 +5,7 @@
 /* ***********************
  * Require Statements
  *************************/
+const utilities = require("./utilities/") //for error handler use
 const baseController = require("./controllers/baseController")
 const express = require("express")
 const expressLayouts = require("express-ejs-layouts")
@@ -12,7 +13,7 @@ const env = require("dotenv").config()
 const inventoryRoute = require("./routes/inventoryRoute")
 const app = express()
 const static = require("./routes/static")
-const utilities = require("./utilities/") //for error handler use
+
 
 
 /* ***********************
@@ -28,7 +29,6 @@ app.set("layout", "./layouts/layout") // not at views root
 // before doing anything else, the nav partial must be created and saved to res.locals (global bypass in order to view the nav on all pages) "Global Middleware
 // Global Navigation Middleware 
 
-// Change this:
 app.use(async (req, res, next) => {
   // const utilities = require("./utilities/") <--- Removed THIS because the require statement is now at the top of the file
   const nav = await utilities.getNav()
@@ -48,7 +48,7 @@ app.use(async (req, res, next) => {
 /* ***********************
  * Index route
  *************************/
-app.get("/", baseController.buildHome)
+app.get("/", utilities.handleErrors(baseController.buildHome))
 
 /* ***********************
 * Express Error Handler
