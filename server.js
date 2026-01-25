@@ -12,6 +12,7 @@ const env = require("dotenv").config()
 const inventoryRoute = require("./routes/inventoryRoute")
 const app = express()
 const static = require("./routes/static")
+const utilities = require("./utilities/") //for error handler use
 
 
 /* ***********************
@@ -27,8 +28,9 @@ app.set("layout", "./layouts/layout") // not at views root
 // before doing anything else, the nav partial must be created and saved to res.locals (global bypass in order to view the nav on all pages) "Global Middleware
 // Global Navigation Middleware 
 
+// Change this:
 app.use(async (req, res, next) => {
-  const utilities = require("./utilities/")
+  // const utilities = require("./utilities/") <--- Removed THIS because the require statement is now at the top of the file
   const nav = await utilities.getNav()
   res.locals.nav = nav
   next()
@@ -39,6 +41,10 @@ app.use(static)
 // Inventory routes
 app.use("/inv", inventoryRoute)
 
+// File Not Found Route - must be last route in list
+app.use(async (req, res, next) => {
+  next({status: 404, message: 'Sorry, we appear to have lost that page.'})
+})
 /* ***********************
  * Index route
  *************************/

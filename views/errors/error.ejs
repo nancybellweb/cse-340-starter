@@ -1,0 +1,12 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+<% } else { %>
+    <h1>Server Error</h1>
+<% } %>
+
+<p class="notice">
+    <%- message %>
+</p>
+
+<img src="/images/site/error-image.jpg" alt="Funny error illustration" style="max-width: 300px;">
+<p>Upssy. Something went wrong. Don't panic! Use the menu above to get back on track!</p>
