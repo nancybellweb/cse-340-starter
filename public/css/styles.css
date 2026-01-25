@@ -184,3 +184,77 @@ nav ul li a {
   text-decoration: none;
   font-weight: bold;
 }
+
+
+/*---  the nav bar */
+
+
+nav {
+    background-color: #333;
+    padding: 0.5rem 0;
+}
+
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around; 
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 15px;
+    display: block;
+}
+
+nav ul li a:hover {
+    background-color: #555;
+    color: #f0c040; 
+    border-radius: 4px;
+}
+
+
+/* vehicle cards */
+
+
+#inv-display {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+    gap: 20px;
+    padding: 20px;
+    list-style-type: none;
+}
+
+#inv-display li {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#inv-display img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover; 
+}
+
+.namePrice {
+    padding: 15px;
+}
+
+.namePrice h2 {
+    margin: 0 0 10px 0;
+    font-size: 1.2rem;
+}
+
+.namePrice span {
+    font-weight: bold;
+    color: #2c3e50;
+}
