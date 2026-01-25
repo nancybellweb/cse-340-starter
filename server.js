@@ -5,12 +5,14 @@
 /* ***********************
  * Require Statements
  *************************/
+const baseController = require("./controllers/baseController")
 const express = require("express")
 const expressLayouts = require("express-ejs-layouts")
 const env = require("dotenv").config()
+const inventoryRoute = require("./routes/inventoryRoute")
 const app = express()
 const static = require("./routes/static")
-const baseController = require("./controllers/baseController")
+
 
 /* ***********************
  * View Engine and Templates
@@ -22,7 +24,20 @@ app.set("layout", "./layouts/layout") // not at views root
 /* ***********************
  * Routes
  *************************/
+// before doing anything else, the nav partial must be created and saved to res.locals (global bypass in order to view the nav on all pages) "Global Middleware
+// Global Navigation Middleware 
+
+app.use(async (req, res, next) => {
+  const utilities = require("./utilities/")
+  const nav = await utilities.getNav()
+  res.locals.nav = nav
+  next()
+})
+
 app.use(static)
+
+// Inventory routes
+app.use("/inv", inventoryRoute)
 
 /* ***********************
  * Index route
