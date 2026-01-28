@@ -13,7 +13,8 @@ const env = require("dotenv").config()
 const inventoryRoute = require("./routes/inventoryRoute")
 const app = express()
 const static = require("./routes/static")
-
+const session = require("express-session")
+const pool = require('./database/')
 
 
 /* ***********************
@@ -26,6 +27,24 @@ app.set("layout", "./layouts/layout") // not at views root
 /* ***********************
  * Routes
  *************************/
+
+// Sessions middleware
+app.use(session({
+  store: new (require('connect-pg-simple')(session))({
+    pool,
+  }),
+  secret: process.env.SESSION_SECRET,
+  resave: true,
+  saveUninitialized: true,
+  name: 'sessionId',
+}))
+
+// Express Messages Middleware
+app.use(require('connect-flash')())
+app.use(function(req, res, next){
+  res.locals.messages = require('express-messages')(req, res)
+  next()
+})
 // before doing anything else, the nav partial must be created and saved to res.locals (global bypass in order to view the nav on all pages) "Global Middleware
 // Global Navigation Middleware 
 
