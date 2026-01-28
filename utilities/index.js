@@ -74,14 +74,27 @@ Util.buildClassificationGrid = async function(data){
 * Build the vehicle detail HTML
 * ************************************ */
 Util.buildVehicleDetail = async function(data) {
-    let display = `<div class="detail-container">`
+    // 1. Format the Price and Mileage first
+    const price = new Intl.NumberFormat('en-US', { 
+        style: 'currency', 
+        currency: 'USD' 
+    }).format(data.inv_price);
+
+    const mileage = new Intl.NumberFormat('en-US').format(data.inv_miles);
+
+    // 2. Build the HTML string using those formatted variables
+    let display = '<section class="vehicle-details">'
     display += `<img src="${data.inv_image}" alt="${data.inv_make} ${data.inv_model}">`
-    display += `<div class="detail-info">`
+    display += '<div class="details-content">'
     display += `<h2>${data.inv_make} ${data.inv_model} Details</h2>`
-    display += `<p><strong>Price:</strong> $${new Intl.NumberFormat('en-US').format(data.inv_price)}</p>`
-    display += `<p><strong>Description:</strong> ${data.inv_description}</p>`
-    display += `<p><strong>Color:</strong> ${data.inv_color}</p>`
-    display += `<p><strong>Mileage:</strong> ${new Intl.NumberFormat('en-US').format(data.inv_miles)} miles</p>`
-    display += `</div></div>`
+    
+    // Use the 'price' and 'mileage' variables we just created
+    display += `<p class="price"><strong>Price:</strong> ${price}</p>`
+    display += `<p class="description"><strong>Description:</strong> ${data.inv_description}</p>`
+    display += `<p class="color"><strong>Color:</strong> ${data.inv_color}</p>`
+    display += `<p class="miles"><strong>Mileage:</strong> ${mileage} miles</p>`
+    
+    display += '</div>'
+    display += '</section>'
     return display
 }

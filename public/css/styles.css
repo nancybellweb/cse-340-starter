@@ -258,3 +258,21 @@ nav ul li a:hover {
     font-weight: bold;
     color: #2c3e50;
 }
+
+/* Vehicle Detail Styling */
+.vehicle-details {
+  display: flex;
+  flex-direction: column; /* Stacked on mobile */
+  gap: 20px;
+  padding: 10px;
+}
+
+@media screen and (min-width: 600px) {
+  .vehicle-details {
+    flex-direction: row; /* Side-by-side on desktop */
+    align-items: flex-start;
+  }
+  .vehicle-details img {
+    max-width: 50%;
+  }
+}
