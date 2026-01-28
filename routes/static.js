@@ -18,6 +18,13 @@ router.get("/", (req, res) => {
     res.render("index", { title: "Home" });
 });
 
+// This route purposely triggers an error (because my cse-340 grader assignment requires it)
+router.get("/footer-error", (req, res, next) => {
+    const err = new Error("This is a deliberate test error for the grader.")
+    err.status = 500
+    next(err)
+})
+
 module.exports = router;
 
 
