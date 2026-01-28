@@ -37,9 +37,10 @@ invCont.buildByInvId = async function (req, res, next) {
     // This will build the HTML for the specific vehicle detail
     const vehicleHtml = await utilities.buildVehicleDetail(data)
     
-    res.render("./inventory/detail", {
-        title: `${data.inv_make} ${data.inv_model}`,
-        nav: res.locals.nav, 
-        vehicleHtml,
+    res.render("inventory/detail", {
+    title: `${data.inv_make} ${data.inv_model}`,
+    nav: res.locals.nav, 
+    vehicleHtml,
+    messages: req.flash(), // flash messages
     })
 }
