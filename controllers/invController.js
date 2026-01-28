@@ -28,7 +28,7 @@ invCont.buildByInvId = async function (req, res, next) {
     const inv_id = req.params.invId
     const data = await invModel.getInventoryById(inv_id)
     
-    // Create the HTML for the specific vehicle (we'll make this utility next)
+    // This will build the HTML for the specific vehicle detail
     const vehicleHtml = await utilities.buildVehicleDetail(data)
     
     res.render("./inventory/detail", {
