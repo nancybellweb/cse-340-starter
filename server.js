@@ -15,7 +15,33 @@ const app = express()
 const static = require("./routes/static")
 const session = require("express-session")
 const pool = require('./database/')
+const flash = require('connect-flash')
 
+/* ***********************
+ * Middleware
+ * ************************/
+app.use(session({
+  store: new (require('connect-pg-simple')(session))({
+    createTableIfMissing: true,
+    pool,
+  }),
+  secret: process.env.SESSION_SECRET,
+  resave: false,           // Changed to false (standard for pg-simple)
+  saveUninitialized: false, // Keep as false
+  name: 'sessionId',
+  cookie: {
+    maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+    secure: false, // MUST be false for localhost (HTTP)
+    httpOnly: true,
+  },
+}))
+
+// Express Messages Middleware
+app.use(flash()) // Usinng the variable instead of requiring it here
+app.use(function(req, res, next){
+  res.locals.messages = require('express-messages')(req, res)
+  next()
+})
 
 /* ***********************
  * View Engine and Templates
@@ -28,23 +54,6 @@ app.set("layout", "./layouts/layout") // not at views root
  * Routes
  *************************/
 
-// Sessions middleware
-app.use(session({
-  store: new (require('connect-pg-simple')(session))({
-    pool,
-  }),
-  secret: process.env.SESSION_SECRET,
-  resave: true,
-  saveUninitialized: true,
-  name: 'sessionId',
-}))
-
-// Express Messages Middleware
-app.use(require('connect-flash')())
-app.use(function(req, res, next){
-  res.locals.messages = require('express-messages')(req, res)
-  next()
-})
 // before doing anything else, the nav partial must be created and saved to res.locals (global bypass in order to view the nav on all pages) "Global Middleware
 // Global Navigation Middleware 
 
@@ -55,19 +64,22 @@ app.use(async (req, res, next) => {
   next()
 })
 
+
 app.use(static)
 
 // Inventory routes
 app.use("/inv", inventoryRoute)
 
-// File Not Found Route - must be last route in list
-app.use(async (req, res, next) => {
-  next({status: 404, message: 'Sorry, we appear to have lost that page.'})
-})
 /* ***********************
  * Index route
  *************************/
 app.get("/", utilities.handleErrors(baseController.buildHome))
+
+
+// File Not Found Route - must be last route in list
+app.use(async (req, res, next) => {
+  next({status: 404, message: 'Sorry, we appear to have lost that page.'})
+})
 
 /* ***********************
 * Express Error Handler
