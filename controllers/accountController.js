@@ -1,9 +1,14 @@
-// After successful registration logic:
-req.flash(
-    "notice",
-    `Congratulations, you're registered ${account_firstname}. Please log in.`
-)
-res.status(201).render("account/login", {
-    title: "Login",
-    nav,
-})
+const utilities = require("../utilities/")
+
+/* ****************************************
+* Deliver login view
+* *************************************** */
+async function buildLogin(req, res, next) {
+    let nav = await utilities.getNav()
+    res.render("account/login", {
+        title: "Login",
+        nav,
+    })
+}
+
+module.exports = { buildLogin }
