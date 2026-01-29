@@ -16,6 +16,7 @@ const static = require("./routes/static")
 const session = require("express-session")
 const pool = require('./database/')
 const flash = require('connect-flash')
+const accountRoute = require('./routes/accountRoute')
 
 /* ***********************
  * Middleware
@@ -69,6 +70,9 @@ app.use(static)
 
 // Inventory routes
 app.use("/inv", inventoryRoute)
+
+// Account routes
+app.use("/account", accountRoute)
 
 /* ***********************
  * Index route
