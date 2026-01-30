@@ -5,6 +5,7 @@
 /* ***********************
  * Require Statements
  *************************/
+const bodyParser = require("body-parser")
 const utilities = require("./utilities/") //for error handler use
 const baseController = require("./controllers/baseController")
 const express = require("express")
@@ -50,6 +51,8 @@ app.use(function(req, res, next){
 app.set("view engine", "ejs")
 app.use(expressLayouts)
 app.set("layout", "./layouts/layout") // not at views root
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 
 /* ***********************
  * Routes

@@ -279,7 +279,7 @@ nav ul li a:hover {
 
 /* Login Form styling */
 
-.login-container {
+.login-container, .registration-container {
     max-width: 400px;
     margin: 2rem auto;
     padding: 1.5rem;
@@ -289,18 +289,18 @@ nav ul li a:hover {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-#loginForm {
+#loginForm, #registerForm {
     display: flex;
     flex-direction: column;
 }
 
-#loginForm label {
+#loginForm label, #registerForm label {
     margin-bottom: 0.5rem;
     font-weight: bold;
     color: #333;
 }
 
-#loginForm input {
+#loginForm input, #registerForm input {
     padding: 0.8rem;
     margin-bottom: 1.5rem;
     border: 1px solid #ccc;
@@ -314,7 +314,7 @@ nav ul li a:hover {
     box-shadow: 0 0 5px rgba(0, 86, 179, 0.3);
 }
 
-#loginForm button {
+#loginForm button, #registerForm button {
     padding: 0.8rem;
     background-color: #222;
     color: white;
@@ -345,3 +345,11 @@ nav ul li a:hover {
 .login-container a:hover {
     text-decoration: underline;
 }
+
+
+#registerForm span {
+    font-size: 0.8rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
