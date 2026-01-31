@@ -15,11 +15,9 @@ router.post(
     "/register",
     regValidate.registationRules(),
     regValidate.checkRegData,
-    utilities.handleErrors(accountController.registerAccount)
+    accountController.registerAccount
 )
 
 
 module.exports = router
 
-console.log(accountController)
-//test

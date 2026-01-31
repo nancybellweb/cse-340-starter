@@ -1,4 +1,5 @@
 const utilities = require("../utilities/")
+const bcrypt = require("bcryptjs")
 
 
 /* ****************************************
@@ -27,21 +28,24 @@ async function buildRegister(req, res, next) {
 * Process Registration
 * *************************************** */
 async function registerAccount(req, res) {
-    let nav = await utilities.getNav()
-    const { account_firstname } = req.body
+    const { account_firstname, account_lastname, account_email, account_password } = req.body
 
-    // (database code to register the user would go here)
-    // (database code to add the user to the database would go here)
+    const hashedPassword = await bcrypt.hash(account_password, 10)
 
-    req.flash(
-        "notice",
-        `Congratulations, you're registered ${account_firstname}. Please log in.`
+    const regResult = await accountModel.registerAccount(
+        account_firstname,
+        account_lastname,
+        account_email,
+        hashedPassword
     )
-    res.status(201).render("account/login", {
-        title: "Login",
-        nav,
-    })
+
+    if (regResult) {
+        res.redirect("/account/login")
+    } else {
+        res.render("account/register", { title: "Register", errors: null })
+    }
 }
+
 
 module.exports = { buildLogin, buildRegister, registerAccount }
 
