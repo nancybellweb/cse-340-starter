@@ -352,4 +352,21 @@ nav ul li a:hover {
     color: #666;
     margin-bottom: 0.5rem;
 }
+.password-rules {
+  font-size: 0.85rem;
+  color: #555;
+  background-color: #f3f3f3;
+  padding: 0.5rem;
+  border-radius: 5px;
+  margin-bottom: 0.5rem;
+}
+
+input:required:invalid, input:focus:invalid {
+  border: 2px solid red;
+}
+
+input:required:valid {
+  border: 2px solid green;
+}
+
 
