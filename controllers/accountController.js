@@ -67,10 +67,47 @@ async function registerAccount(req, res) {
     }
     }
 
+/* ****************************************
+* Process Login
+* *************************************** */
+async function loginAccount(req, res) {
+    const { account_email, account_password } = req.body
+    let nav = await utilities.getNav()
+
+    // Get account data by email
+    const accountData = await accountModel.getAccountByEmail(account_email)
+
+    if (!accountData) {
+        req.flash("notice", "Invalid email or password.")
+        return res.status(400).render("account/login", {
+        title: "Login",
+        nav,
+        account_email
+        })
+    }
+
+    // Compare password
+    const match = await bcrypt.compare(account_password, accountData.account_password)
+
+    if (!match) {
+        req.flash("notice", "Invalid email or password.")
+        return res.status(400).render("account/login", {
+        title: "Login",
+        nav,
+        account_email
+        })
+    }
+    // Login successful, set session variables
+    
+    req.session.loggedin = true
+    req.session.accountData = accountData
+
+    req.flash("notice", "You are now logged in.")
+    return res.redirect("/account/")
+}
 
 
-module.exports = { buildLogin, buildRegister, registerAccount }
-
+module.exports = { buildLogin, buildRegister, registerAccount, loginAccount }
 
 
 

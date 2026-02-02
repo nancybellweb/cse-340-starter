@@ -60,3 +60,5 @@ invCont.buildInventoryManagement = async function (req, res, next) {
         next(error)
     }
 }
+
+module.exports = invCont

@@ -33,7 +33,6 @@ Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)
 
 
 
-module.exports = Util
 
 
 
@@ -98,3 +97,18 @@ Util.buildVehicleDetail = async function(data) {
     display += '</section>'
     return display
 }
+/* ***************************
+ * Check Login Middleware
+ *************************** */
+Util.checkLogin = function (req, res, next) {
+    if (req.session && req.session.loggedin) {
+        next()
+    } else {
+        req.flash("notice", "Please log in to access this page.")
+        return res.redirect("/account/login")
+    }
+}
+
+
+module.exports = Util
+/* **************************************/

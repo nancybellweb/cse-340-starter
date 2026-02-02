@@ -6,6 +6,7 @@ const utilities = require("../utilities/")
 const regValidate = require("../utilities/account-validation")
 
 
+
 // login view
 router.get("/login", utilities.handleErrors(accountController.buildLogin));
 // Route to deliver registration view
@@ -16,6 +17,10 @@ router.post(
     regValidate.registationRules(),
     regValidate.checkRegData,
     accountController.registerAccount
+)
+router.post(
+    "/login",
+    utilities.handleErrors(accountController.loginAccount)
 )
 
 
