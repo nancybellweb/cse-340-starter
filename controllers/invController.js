@@ -44,3 +44,19 @@ invCont.buildByInvId = async function (req, res, next) {
     messages: req.flash(), // flash messages
     })
 }
+
+/* ***************************
+ *  Deliver Inventory Management View
+ * ************************** */
+invCont.buildInventoryManagement = async function (req, res, next) {
+    try {
+        let nav = await utilities.getNav()
+        res.render("inventory/management", {
+        title: "Inventory Management",
+        nav,
+        message: req.flash("notice"),
+        })
+    } catch (error) {
+        next(error)
+    }
+}

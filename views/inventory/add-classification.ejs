@@ -1,0 +1,13 @@
+<%locals.title = "Add Classification | CSE 340 App"%>
+
+<main id="add-classification">
+    <h1>Add New Classification</h1>
+        <% if (locals.message) { %>
+        <div class="notice"><%= message %></div>
+    <% } %>
+
+    <form action="/inv/add-classification" method="post">
+        <input type="text" name="classification_name" placeholder="no spaces or special characters" required>
+        <button type="submit">Add Classification</button>
+    </form>
+</main>
