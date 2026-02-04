@@ -66,5 +66,56 @@ async function addClassification(classification_name) {
 async function getClassifications() {
   return await pool.query("SELECT * FROM classification ORDER BY classification_name")
 }
+
+/* ****************************************
+ * Add new inventory item
+ **************************************** */
+async function addInventory(
+  classification_id,
+  inv_make,
+  inv_model,
+  inv_year,
+  inv_description,
+  inv_image,
+  inv_thumbnail,
+  inv_price,
+  inv_miles,
+  inv_color
+) {
+  try {
+    const sql = `
+      INSERT INTO inventory (
+        classification_id,
+        inv_make,
+        inv_model,
+        inv_year,
+        inv_description,
+        inv_image,
+        inv_thumbnail,
+        inv_price,
+        inv_miles,
+        inv_color
+      )
+      VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)
+      RETURNING *;
+    `
+    const data = await pool.query(sql, [
+      classification_id,
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_miles,
+      inv_color
+    ])
+    return data.rows[0]
+  } catch (error) {
+    console.error("addInventory error:", error)
+    return null
+  }
+}
 // Update your exports to include the new function
-module.exports = { getClassifications, getInventoryByClassificationId, getInventoryById, addClassification, getClassifications };
+module.exports = { getClassifications, getInventoryByClassificationId, getInventoryById, addClassification, addInventory };

@@ -35,7 +35,7 @@ router.post(
     utilities.checkLogin,
     invValidate.inventoryRules(),
     invValidate.checkInventoryData,
-    utilities.handleErrors(invController.addInventory)
+    utilities.handleErrors(invController.processAddInventory)
 )
 
 module.exports = router;
