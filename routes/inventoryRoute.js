@@ -44,11 +44,11 @@ router.get(
     utilities.handleErrors(invController.buildEditInventory)
 )
 router.post(
-    "/edit/:invId",
+    "/edit",
     utilities.checkLogin,
     invValidate.inventoryRules(),
-    invValidate.checkInventoryData,
-    utilities.handleErrors(invController.processEditInventory)
+    invValidate.checkUpdateData,
+    utilities.handleErrors(invController.updateInventory)
 )
 
 module.exports = router;
