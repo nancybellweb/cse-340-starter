@@ -184,6 +184,24 @@ invCont.processAddInventory = async function (req, res, next) {
         next(error)
     }
 }
+/* ****************************************
+* Deliver Edit Inventory View
+**************************************** */
+invCont.buildEditInventory = async function (req, res, next) {
+    const inv_id = req.params.invId
+
+    const itemData = await invModel.getInventoryById(inv_id)
+    const classificationList = await utilities.buildClassificationList(itemData.classification_id)
+    let nav = await utilities.getNav()
+
+    res.render("inventory/edit-inventory", {
+        title: `Edit ${itemData.inv_make} ${itemData.inv_model}`,
+        nav,
+        classificationList,
+        errors: null,
+        ...itemData
+    })
+}
 
 
 module.exports = invCont

@@ -37,5 +37,18 @@ router.post(
     invValidate.checkInventoryData,
     utilities.handleErrors(invController.processAddInventory)
 )
+//route to edit inventory
+router.get(
+    "/edit/:invId",
+    utilities.checkLogin,
+    utilities.handleErrors(invController.buildEditInventory)
+)
+router.post(
+    "/edit/:invId",
+    utilities.checkLogin,
+    invValidate.inventoryRules(),
+    invValidate.checkInventoryData,
+    utilities.handleErrors(invController.processEditInventory)
+)
 
 module.exports = router;
