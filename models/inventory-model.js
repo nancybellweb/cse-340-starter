@@ -186,5 +186,19 @@ async function updateInventory(
   }
 }
 
+/* ****************************************
+ * Delete inventory item
+ **************************************** */
+async function deleteInventory(inv_id) {
+  try {
+    const sql = "DELETE FROM inventory WHERE inv_id = $1 RETURNING *;"
+    const data = await pool.query(sql, [inv_id])
+    return data.rows[0]
+  } catch (error) {
+    console.error("deleteInventory error:", error)
+    return null
+  }
+}
+
 // Update your exports to include the new function
-module.exports = { getClassifications, getInventoryByClassificationId, getInventoryById, addClassification, addInventory, getAllInventory, updateInventory };
+module.exports = { getClassifications, getInventoryByClassificationId, getInventoryById, addClassification, addInventory, getAllInventory, updateInventory, deleteInventory };

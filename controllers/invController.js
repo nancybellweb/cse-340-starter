@@ -243,5 +243,41 @@ invCont.updateInventory = async function (req, res, next) {
     }
 }
 
+/* ****************************************
+* Deliver Delete Confirmation View
+**************************************** */
+invCont.buildDeleteInventory = async function (req, res, next) {
+    const inv_id = parseInt(req.params.inv_id)
+    const itemData = await invModel.getInventoryById(inv_id)
+    let nav = await utilities.getNav()
+
+    res.render("inventory/delete-confirm", {
+        title: `Delete ${itemData.inv_make} ${itemData.inv_model}`,
+        nav,
+        errors: null,
+        inv_id: itemData.inv_id,
+        inv_make: itemData.inv_make,
+        inv_model: itemData.inv_model,
+        inv_year: itemData.inv_year,
+        inv_price: itemData.inv_price
+    })
+}
+/* ****************************************
+* Delete Inventory Item *POST
+**************************************** */
+invCont.deleteInventory = async function (req, res, next) {
+    const inv_id = parseInt(req.body.inv_id)
+
+    const deleteResult = await invModel.deleteInventory(inv_id)
+
+    if (deleteResult) {
+        req.flash("notice", "The vehicle was successfully deleted.")
+        res.redirect("/inv/management")
+    } else {
+        req.flash("notice", "Sorry, the delete failed.")
+        res.redirect(`/inv/delete/${inv_id}`)
+    }
+}
+
 
 module.exports = invCont

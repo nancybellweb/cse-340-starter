@@ -24,6 +24,7 @@
         <li>
             <%= item.inv_make %> <%= item.inv_model %>
             — <a href="/inv/edit/<%= item.inv_id %>">Edit</a>
+            <a href="/inv/delete/<%= item.inv_id %>">Delete</a>
         </li>
         <% }) %>
     </ul>
