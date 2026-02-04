@@ -104,6 +104,24 @@ invCont.addClassification = async function (req, res, next) {
         next(error)
     }
 }
+/* ****************************************
+* Deliver Add Inventory View
+**************************************** */
+invCont.buildAddInventory = async function (req, res, next) {
+    try {
+        let nav = await utilities.getNav()
+        let classificationList = await utilities.buildClassificationList()
+
+        res.render("inventory/add-inventory", {
+        title: "Add Inventory",
+        nav,
+        classificationList,
+        errors: null
+        })
+    } catch (error) {
+        next(error)
+    }
+}
 
 
 
