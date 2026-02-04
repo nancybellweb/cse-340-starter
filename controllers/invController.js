@@ -47,12 +47,16 @@ invCont.buildByInvId = async function (req, res, next) {
 /* ***************************
  *  Deliver Inventory Management View
  * ************************** */
+//sends the inventory list to the view-
 invCont.buildInventoryManagement = async function (req, res, next) {
     try {
         let nav = await utilities.getNav()
+        let inventory = await invModel.getAllInventory()
+        
         res.render("inventory/management", {
         title: "Inventory Management",
         nav,
+        inventory,
         message: req.flash("notice"),
         })
     } catch (error) {

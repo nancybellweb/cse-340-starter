@@ -117,5 +117,20 @@ async function addInventory(
     return null
   }
 }
+
+/* ****************************************
+ * Get all inventory items
+ **************************************** */
+async function getAllInventory() {
+  try {
+    const sql = "SELECT inv_id, inv_make, inv_model FROM inventory ORDER BY inv_make, inv_model"
+    const data = await pool.query(sql)
+    return data.rows
+  } catch (error) {
+    console.error("getAllInventory error:", error)
+    return null
+  }
+}
+
 // Update your exports to include the new function
-module.exports = { getClassifications, getInventoryByClassificationId, getInventoryById, addClassification, addInventory };
+module.exports = { getClassifications, getInventoryByClassificationId, getInventoryById, addClassification, addInventory, getAllInventory };

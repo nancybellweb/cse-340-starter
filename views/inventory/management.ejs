@@ -16,5 +16,19 @@
         <li><a href="/inv/add-classification">Add New Classification</a></li>
         <li><a href="/inv/add-inventory">Add New Inventory Item</a></li>
     </ul>
+    <h2>Manage Inventory</h2>
+
+    <% if (inventory && inventory.length > 0) { %>
+    <ul>
+        <% inventory.forEach(item => { %>
+        <li>
+            <%= item.inv_make %> <%= item.inv_model %>
+            — <a href="/inv/edit/<%= item.inv_id %>">Edit</a>
+        </li>
+        <% }) %>
+    </ul>
+    <% } else { %>
+    <p>No inventory items found.</p>
+    <% } %>
 
 </main>
