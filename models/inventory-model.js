@@ -60,6 +60,11 @@ async function addClassification(classification_name) {
     return null
   }
 }
-
+/****************************
+ * add classification dropdown
+ ***************************/
+async function getClassifications() {
+  return await pool.query("SELECT * FROM classification ORDER BY classification_name")
+}
 // Update your exports to include the new function
-module.exports = { getClassifications, getInventoryByClassificationId, getInventoryById, addClassification };
+module.exports = { getClassifications, getInventoryByClassificationId, getInventoryById, addClassification, getClassifications };
