@@ -12,5 +12,7 @@ router.get("/detail/:invId", utilities.handleErrors(invController.buildByInvId))
 
 // Route to deliver the inventory management view
 router.get("/management", utilities.checkLogin, utilities.handleErrors(invController.buildInventoryManagement));
+// Route to deliver the add classification view
+router.get("/add-classification", utilities.checkLogin, utilities.handleErrors(invController.buildAddClassification));
 
 module.exports = router;

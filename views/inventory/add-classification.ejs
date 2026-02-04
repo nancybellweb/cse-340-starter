@@ -1,3 +1,5 @@
+<%- include('../partials/header.ejs') %>
+
 <%locals.title = "Add Classification | CSE 340 App"%>
 
 <main id="add-classification">
@@ -6,8 +8,18 @@
         <div class="notice"><%= message %></div>
     <% } %>
 
-    <form action="/inv/add-classification" method="post">
-        <input type="text" name="classification_name" placeholder="no spaces or special characters" required>
+    <form action="/inv/add-classification" method="post" id="addClassificationForm">
+        <label for="classification_name">Classification Name:</label>
+        <input 
+        type="text" 
+        name="classification_name" 
+        id="classification_name" 
+        pattern="^[A-Za-z]+$"
+        title="Letters only. No spaces or special characters."
+        placeholder="no spaces or special characters" 
+        required>
         <button type="submit">Add Classification</button>
     </form>
+    <%- include('../partials/footer.ejs') %>
+
 </main>
