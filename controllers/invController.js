@@ -202,6 +202,45 @@ invCont.buildEditInventory = async function (req, res, next) {
         ...itemData
     })
 }
+/* ****************************************
+* update the inventory after edit
+**************************************** */
+invCont.updateInventory = async function (req, res, next) {
+    const {
+        inv_id,
+        inv_make,
+        inv_model,
+        inv_year,
+        inv_description,
+        inv_image,
+        inv_thumbnail,
+        inv_price,
+        inv_miles,
+        inv_color,
+        classification_id
+    } = req.body
 
+    const updateResult = await invModel.updateInventory(
+        inv_id,
+        inv_make,
+        inv_model,
+        inv_year,
+        inv_description,
+        inv_image,
+        inv_thumbnail,
+        inv_price,
+        inv_miles,
+        inv_color,
+        classification_id
+    )
+
+    if (updateResult) {
+        req.flash("notice", `${inv_make} ${inv_model} was successfully updated.`)
+        res.redirect("/inv/management")
+    } else {
+        req.flash("notice", "Sorry, the update failed.")
+        res.redirect(`/inv/edit/${inv_id}`)
+    }
+}
 
 module.exports = invCont
