@@ -25,7 +25,6 @@ invCont.buildByClassificationId = async function (req, res, next) {
     })
 }
 
-    module.exports = invCont
 
 /* ***************************
  * Build inventory item detail view
@@ -64,13 +63,48 @@ invCont.buildInventoryManagement = async function (req, res, next) {
 /* ****************************************
 * Deliver Add Classification View
 * *************************************** */
-async function buildAddClassification(req, res, next) {
+
+invCont.buildAddClassification = async function (req, res, next) {
     let nav = await utilities.getNav()
     res.render("inventory/add-classification", {
         title: "Add Classification",
         nav,
         errors: null
     })
+}/* ****************************************
+* Process Add Classification
+**************************************** */
+invCont.addClassification = async function (req, res, next) {
+    const { classification_name } = req.body
+
+    try {
+        // Insert into database
+        const result = await invModel.addClassification(classification_name)
+
+        if (result) {
+        // Success: rebuild nav so the new classification appears immediately
+        let nav = await utilities.getNav()
+        req.flash("notice", `Classification "${classification_name}" added successfully.`)
+        return res.status(201).render("inventory/management", {
+            title: "Inventory Management",
+            nav,
+            message: req.flash("notice")
+        })
+        } else {
+        // Failure: re-render form
+        let nav = await utilities.getNav()
+        req.flash("notice", "Failed to add classification.")
+        return res.status(500).render("inventory/add-classification", {
+            title: "Add Classification",
+            nav,
+            errors: null
+        })
+        }
+    } catch (error) {
+        next(error)
+    }
 }
 
-module.exports = { buildByClassificationId, buildByInvId, buildInventoryManagement, buildAddClassification, invModel} // export  invCont
+
+
+module.exports = invCont
