@@ -122,7 +122,64 @@ invCont.addInventory = async function (req, res, next) {
         next(error)
     }
 }
-
+/* ****************************************
+* Process Add Inventory
+**************************************** */
+invCont.processAddInventory = async function (req, res, next) {
+    //pulls all field from form
+    const {
+        classification_id,
+        inv_make,
+        inv_model,
+        inv_year,
+        inv_description,
+        inv_image,
+        inv_thumbnail,
+        inv_price,
+        inv_miles,
+        inv_color
+    } = req.body
+    //sends to model to add to database
+    try {
+        const result = await invModel.addInventory(
+        classification_id,
+        inv_make,
+        inv_model,
+        inv_year,
+        inv_description,
+        inv_image,
+        inv_thumbnail,
+        inv_price,
+        inv_miles,
+        inv_color
+        )
+        //if successful, shows success message
+        if (result) {
+        let nav = await utilities.getNav()
+        req.flash("notice", "Inventory item added successfully.")
+        return res.status(201).render("inventory/management", {
+            title: "Inventory Management",
+            nav,
+            message: req.flash("notice")
+        })
+        //if failed, shows failure message
+        } else {
+        let nav = await utilities.getNav()
+        req.flash("notice", "Failed to add inventory item.")
+        let classificationList = await utilities.buildClassificationList(classification_id)
+        //re-renders add-inventory view with previous data
+        return res.status(500).render("inventory/add-inventory", {
+            title: "Add Inventory",
+            nav,
+            classificationList,
+            errors: null,
+            ...req.body
+        })
+        }
+    } catch (error) {
+        next(error)
+    }
+}
 
 
 module.exports = invCont
