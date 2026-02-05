@@ -69,42 +69,45 @@ async function registerAccount(req, res) {
     }
 
 /* ****************************************
-* Process Login
-* *************************************** */
+ *  Process login request
+ * ************************************ */
 async function loginAccount(req, res) {
-    const { account_email, account_password } = req.body
     let nav = await utilities.getNav()
-
-    // Get account data by email
+    const { account_email, account_password } = req.body
     const accountData = await accountModel.getAccountByEmail(account_email)
-
     if (!accountData) {
-        req.flash("notice", "Invalid email or password.")
-        return res.status(400).render("account/login", {
+        req.flash("notice", "Please check your credentials and try again.")
+        res.status(400).render("account/login", {
         title: "Login",
         nav,
-        account_email
+        errors: null,
+        account_email,
         })
+        return
     }
-
-    // Compare password
-    const match = await bcrypt.compare(account_password, accountData.account_password)
-
-    if (!match) {
-        req.flash("notice", "Invalid email or password.")
-        return res.status(400).render("account/login", {
-        title: "Login",
-        nav,
-        account_email
+    try {
+        if (await bcrypt.compare(account_password, accountData.account_password)) {
+        delete accountData.account_password
+        const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 })
+        if(process.env.NODE_ENV === 'development') {
+            res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
+        } else {
+            res.cookie("jwt", accessToken, { httpOnly: true, secure: true, maxAge: 3600 * 1000 })
+        }
+        return res.redirect("/account/")
+        }
+        else {
+        req.flash("message notice", "Please check your credentials and try again.")
+        res.status(400).render("account/login", {
+            title: "Login",
+            nav,
+            errors: null,
+            account_email,
         })
+        }
+    } catch (error) {
+        throw new Error('Access Forbidden')
     }
-    // Login successful, set session variables
-    
-    req.session.loggedin = true
-    req.session.accountData = accountData
-
-    req.flash("notice", "You are now logged in.")
-    return res.redirect("/account/")
 }
 
 
