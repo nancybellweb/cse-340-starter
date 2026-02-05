@@ -18,6 +18,7 @@ const session = require("express-session")
 const pool = require('./database/')
 const flash = require('connect-flash')
 const accountRoute = require('./routes/accountRoute')
+const cookieParser = require("cookie-parser")
 
 /* ***********************
  * Middleware
@@ -53,6 +54,7 @@ app.use(expressLayouts)
 app.set("layout", "./layouts/layout") // not at views root
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(cookieParser())
 
 /* ***********************
  * Routes
