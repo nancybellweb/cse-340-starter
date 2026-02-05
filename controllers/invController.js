@@ -60,6 +60,52 @@ invCont.buildInventoryManagement = async function (req, res, next) {
         next(error)
     }
 }
+/* ***********************************************
+ * Build the Classification View
+
+ *************************************************/
+invCont.buildByClassificationId = async function (req, res, next) {
+    const classification_id = req.params.classificationId
+    const data = await invModel.getInventoryByClassificationId(classification_id)
+    const nav = await utilities.getNav()
+
+    // If no vehicles found, send to error handler
+    if (!data.length) {
+        return next({ status: 404, message: "No vehicles found." })
+    }
+
+    const grid = await utilities.buildClassificationGrid(data)
+    const className = data[0].classification_name
+
+    res.render("inventory/classification", {
+        title: className + " vehicles",
+        nav,
+        grid
+    })
+}
+
+
+/* ***********************************************
+ * Build the Vehicle Detail View
+ *************************************************/
+invCont.buildByInvId = async function (req, res, next) {
+    const inv_id = req.params.invId
+    const data = await invModel.getInventoryByInvId(inv_id)
+    const nav = await utilities.getNav()
+
+    // If no vehicle found, send to error handler
+    if (!data) {
+        return next({ status: 404, message: "Vehicle not found." })
+    }
+
+    const detail = await utilities.buildVehicleDetail(data)
+
+    res.render("inventory/detail", {
+        title: `${data.inv_make} ${data.inv_model}`,
+        nav,
+        detail
+    })
+}
 
 /* ***************************
  *  Add Inventory View
