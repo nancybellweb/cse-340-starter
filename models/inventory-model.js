@@ -200,5 +200,7 @@ async function deleteInventory(inv_id) {
   }
 }
 
+
+
 // Update your exports to include the new function
 module.exports = { getClassifications, getInventoryByClassificationId, getInventoryById, addClassification, addInventory, getAllInventory, updateInventory, deleteInventory };
