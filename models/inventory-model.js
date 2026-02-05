@@ -200,7 +200,21 @@ async function deleteInventory(inv_id) {
   }
 }
 
+/* ****************************************
+ * Get inventory items by classification_id
+ **************************************** */
+async function getInventoryByClassificationId(classification_id) {
+  try {
+    const data = await pool.query(
+      `SELECT * FROM inventory WHERE classification_id = $1`,
+      [classification_id]
+    )
+    return data.rows
+  } catch (error) {
+    console.error("getInventoryByClassificationId error:", error)
+  }
+}
 
 
 // Update your exports to include the new function
-module.exports = { getClassifications, getInventoryByClassificationId, getInventoryById, addClassification, addInventory, getAllInventory, updateInventory, deleteInventory };
+module.exports = { getClassifications, getInventoryByClassificationId, getInventoryById, addClassification, addInventory, getAllInventory, updateInventory, deleteInventory, getInventoryByClassificationId };
