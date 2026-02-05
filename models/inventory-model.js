@@ -18,19 +18,21 @@ async function getClassifications() {
 /* ***************************
  *  Get inventory by classification_id (AJAX)
  * ************************** */
-async function getInventoryByClassificationId(classification_id) {
+// models/inventory-model.js
+async function getInventoryByClassificationId (classification_id) {
   try {
-    const data = await pool.query(
-        `SELECT inv_id, inv_make, inv_model 
-        FROM inventory 
-        WHERE classification_id = $1
-        ORDER BY inv_make, inv_model`,
-      [classification_id]
-    )
-    return data.rows
+    const sql = `
+      SELECT i.*, c.classification_name
+      FROM inventory i
+      JOIN classification c ON i.classification_id = c.classification_id
+      WHERE i.classification_id = $1
+      ORDER BY i.inv_make, i.inv_model
+    `
+    const result = await pool.query(sql, [classification_id])
+    return result.rows
   } catch (error) {
     console.error("getInventoryByClassificationId error:", error)
-    return []
+    throw error
   }
 }
 
@@ -38,16 +40,19 @@ async function getInventoryByClassificationId(classification_id) {
  *  Get inventory item by inv_id
  *  (Used for detail page — safe to keep)
  * ************************** */
-async function getInventoryById(inv_id) {
+async function getInventoryByInvId (inv_id) {
   try {
-    const data = await pool.query(
-      `SELECT * FROM inventory WHERE inv_id = $1`,
-      [inv_id]
-    )
-    return data.rows[0]
+    const sql = `
+      SELECT i.*, c.classification_name
+      FROM inventory i
+      JOIN classification c ON i.classification_id = c.classification_id
+      WHERE i.inv_id = $1
+    `
+    const result = await pool.query(sql, [inv_id])
+    return result.rows[0]
   } catch (error) {
-    console.error("getInventoryById error:", error)
-    return null
+    console.error("getInventoryByInvId error:", error)
+    throw error
   }
 }
 
@@ -126,7 +131,7 @@ async function addInventory(
 module.exports = {
   getClassifications,
   getInventoryByClassificationId,
-  getInventoryById,
+  getInventoryByInvId,
   addClassification,
   addInventory
 }

@@ -64,10 +64,14 @@ invCont.buildInventoryManagement = async function (req, res, next) {
  * Build the Classification View
 
  *************************************************/
+// temporary debug - paste this near the top of buildByClassificationId
+
 invCont.buildByClassificationId = async function (req, res, next) {
     const classification_id = req.params.classificationId
     const data = await invModel.getInventoryByClassificationId(classification_id)
     const nav = await utilities.getNav()
+    console.log("buildByClassificationId: classification_id =", classification_id)
+    console.log("buildByClassificationId: data sample =", JSON.stringify(data && data[0], null, 2))
 
     // If no vehicles found, send to error handler
     if (!data.length) {
@@ -89,22 +93,27 @@ invCont.buildByClassificationId = async function (req, res, next) {
  * Build the Vehicle Detail View
  *************************************************/
 invCont.buildByInvId = async function (req, res, next) {
-    const inv_id = req.params.invId
-    const data = await invModel.getInventoryByInvId(inv_id)
-    const nav = await utilities.getNav()
+    try {
+        const inv_id = req.params.invId
+        const data = await invModel.getInventoryByInvId(inv_id)
+        const nav = await utilities.getNav()
 
-    // If no vehicle found, send to error handler
-    if (!data) {
+        if (!data) {
         return next({ status: 404, message: "Vehicle not found." })
-    }
+        }
 
-    const detail = await utilities.buildVehicleDetail(data)
+        const detail = await utilities.buildVehicleDetail(data)
 
-    res.render("inventory/detail", {
-        title: `${data.inv_make} ${data.inv_model}`,
+        res.render("inventory/detail", {
+        title: `${data.inv_make ?? data.make ?? ""} ${data.inv_model ?? data.model ?? ""}`,
         nav,
-        detail
-    })
+        detail,
+        vehicleHtml: detail,            // keep your template working
+        message: req.flash("notice")
+        })
+    } catch (err) {
+        next(err)
+    }
 }
 
 /* ***************************
