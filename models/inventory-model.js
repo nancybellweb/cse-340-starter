@@ -3,49 +3,57 @@ const pool = require("../database/")
 /* ***************************
  *  Get all classification data
  * ************************** */
-async function getClassifications(){
-  return await pool.query("SELECT * FROM public.classification ORDER BY classification_name")
+async function getClassifications() {
+  try {
+    const data = await pool.query(
+      "SELECT * FROM classification ORDER BY classification_name"
+    )
+    return data.rows   // MUST return rows only
+  } catch (error) {
+    console.error("getClassifications error:", error)
+    return []
+  }
 }
 
-
-
 /* ***************************
- *  Get all inventory items and classification_name by classification_id
+ *  Get inventory by classification_id (AJAX)
  * ************************** */
 async function getInventoryByClassificationId(classification_id) {
   try {
     const data = await pool.query(
-      `SELECT * FROM public.inventory AS i 
-      JOIN public.classification AS c 
-      ON i.classification_id = c.classification_id 
-      WHERE i.classification_id = $1`,
+        `SELECT inv_id, inv_make, inv_model 
+        FROM inventory 
+        WHERE classification_id = $1
+        ORDER BY inv_make, inv_model`,
       [classification_id]
     )
     return data.rows
   } catch (error) {
-    console.error("getclassificationsbyid error " + error)
+    console.error("getInventoryByClassificationId error:", error)
+    return []
   }
 }
 
 /* ***************************
- * Get specific inventory item by inv_id
+ *  Get inventory item by inv_id
+ *  (Used for detail page — safe to keep)
  * ************************** */
 async function getInventoryById(inv_id) {
   try {
     const data = await pool.query(
-      `SELECT * FROM public.inventory 
-        WHERE inv_id = $1`,
+      `SELECT * FROM inventory WHERE inv_id = $1`,
       [inv_id]
     )
-    return data.rows[0] // We only want the first (and only) row
+    return data.rows[0]
   } catch (error) {
-    console.error("getInventoryById error " + error)
+    console.error("getInventoryById error:", error)
+    return null
   }
 }
 
-/* *****************************
- * Add new classification
- ***************************** */
+/* ***************************
+ *  Add new classification
+ * ************************** */
 async function addClassification(classification_name) {
   try {
     const sql = `
@@ -60,16 +68,10 @@ async function addClassification(classification_name) {
     return null
   }
 }
-/****************************
- * add classification dropdown
- ***************************/
-async function getClassifications() {
-  return await pool.query("SELECT * FROM classification ORDER BY classification_name")
-}
 
-/* ****************************************
- * Add new inventory item
- **************************************** */
+/* ***************************
+ *  Add new inventory item
+ * ************************** */
 async function addInventory(
   classification_id,
   inv_make,
@@ -118,103 +120,13 @@ async function addInventory(
   }
 }
 
-/* ****************************************
- * Get all inventory items
- **************************************** */
-async function getAllInventory() {
-  try {
-    const sql = "SELECT inv_id, inv_make, inv_model FROM inventory ORDER BY inv_make, inv_model"
-    const data = await pool.query(sql)
-    return data.rows
-  } catch (error) {
-    console.error("getAllInventory error:", error)
-    return null
-  }
+/* ***************************
+ *  Export functions
+ * ************************** */
+module.exports = {
+  getClassifications,
+  getInventoryByClassificationId,
+  getInventoryById,
+  addClassification,
+  addInventory
 }
-/* ****************************************
- * Update existing inventory item
- **************************************** */
-async function updateInventory(
-  inv_id,
-  inv_make,
-  inv_model,
-  inv_year,
-  inv_description,
-  inv_image,
-  inv_thumbnail,
-  inv_price,
-  inv_miles,
-  inv_color,
-  classification_id
-) {
-  try {
-    const sql = `
-      UPDATE inventory
-      SET 
-        inv_make = $1,
-        inv_model = $2,
-        inv_year = $3,
-        inv_description = $4,
-        inv_image = $5,
-        inv_thumbnail = $6,
-        inv_price = $7,
-        inv_miles = $8,
-        inv_color = $9,
-        classification_id = $10
-      WHERE inv_id = $11
-      RETURNING *;
-    `
-
-    const data = await pool.query(sql, [
-      inv_make,
-      inv_model,
-      inv_year,
-      inv_description,
-      inv_image,
-      inv_thumbnail,
-      inv_price,
-      inv_miles,
-      inv_color,
-      classification_id,
-      inv_id
-    ])
-
-    return data.rows[0]
-  } catch (error) {
-    console.error("updateInventory error:", error)
-    return null
-  }
-}
-
-/* ****************************************
- * Delete inventory item
- **************************************** */
-async function deleteInventory(inv_id) {
-  try {
-    const sql = "DELETE FROM inventory WHERE inv_id = $1 RETURNING *;"
-    const data = await pool.query(sql, [inv_id])
-    return data.rows[0]
-  } catch (error) {
-    console.error("deleteInventory error:", error)
-    return null
-  }
-}
-
-/* ****************************************
- * Get inventory items by classification_id
- **************************************** */
-async function getInventoryByClassificationId(classification_id) {
-  try {
-    const data = await pool.query(
-      `SELECT * FROM inventory WHERE classification_id = $1`,
-      [classification_id]
-    )
-    return data.rows
-  } catch (error) {
-    console.error("getInventoryByClassificationId error:", error)
-  }
-}
-
-
-// Update your exports to include the new function
-module.exports = { getClassifications, getInventoryByClassificationId, getInventoryById, addClassification, addInventory, getAllInventory, updateInventory, deleteInventory, getInventoryByClassificationId };

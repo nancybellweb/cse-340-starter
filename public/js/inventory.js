@@ -1,41 +1,59 @@
-document.getElementById("classificationSelect").addEventListener("change", function() {
-    const classificationId = this.value
+// Wait for the DOM to load
+document.addEventListener("DOMContentLoaded", () => {
+    const classificationSelect = document.getElementById("classificationSelect")
+    const inventoryDisplay = document.getElementById("inventoryDisplay")
 
-    if (!classificationId) return
+    classificationSelect.addEventListener("change", async () => {
+        const classificationId = classificationSelect.value
 
-    fetch(`/inv/getInventory/${classificationId}`)
-        .then(response => response.json())
-        .then(data => buildInventoryTable(data))
-        .catch(err => console.error(err))
-})
+        // Clear display if nothing selected
+        if (!classificationId) {
+        inventoryDisplay.innerHTML = ""
+        return
+        }
 
-function buildInventoryTable(data) {
-    let html = `
-        <table>
-        <thead>
-            <tr>
-            <th>Vehicle</th>
-            <th>Price</th>
-            <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-    `
+        try {
+        // Fetch JSON data from server
+        const response = await fetch(`/inv/getInventory/${classificationId}`)
+        const data = await response.json()
 
-    data.forEach(item => {
-        html += `
-        <tr>
-            <td>${item.inv_make} ${item.inv_model}</td>
-            <td>$${item.inv_price}</td>
-            <td>
-            <a href="/inv/edit/${item.inv_id}">Edit</a>
-            <a href="/inv/delete/${item.inv_id}">Delete</a>
-            </td>
-        </tr>
+        // If no vehicles found
+        if (!data.length) {
+            inventoryDisplay.innerHTML = "<p>No inventory found for this classification.</p>"
+            return
+        }
+
+        // Build table
+        let table = `
+            <table>
+            <thead>
+                <tr>
+                <th>Make</th>
+                <th>Model</th>
+                </tr>
+            </thead>
+            <tbody>
         `
+
+        data.forEach(item => {
+            table += `
+            <tr>
+                <td>${item.inv_make}</td>
+                <td>${item.inv_model}</td>
+            </tr>
+            `
+        })
+
+        table += `
+            </tbody>
+            </table>
+        `
+
+        inventoryDisplay.innerHTML = table
+
+        } catch (error) {
+        console.error("AJAX error:", error)
+        inventoryDisplay.innerHTML = "<p>Error loading inventory.</p>"
+        }
     })
-
-    html += `</tbody></table>`
-
-    document.getElementById("inventoryDisplay").innerHTML = html
-}
+})

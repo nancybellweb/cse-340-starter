@@ -1,68 +1,56 @@
-// Needed Resources 
+/// routes/inventoryRoute.js
 const express = require("express")
-const router = new express.Router() 
+const router = new express.Router()
 const invController = require("../controllers/invController")
 const utilities = require("../utilities/")
-const invValidate = require("../utilities/inventory-validation")
 
+// Test route to confirm router loads
+router.get("/test", (req, res) => {
+    res.send("inventoryRoute loaded")
+})
 
-// Route to build inventory by classification view
-router.get("/type/:classificationId", utilities.handleErrors(invController.buildByClassificationId));
+// Management view 
+router.get(
+    "/management",
+    utilities.handleErrors(invController.buildInventoryManagement)
+)
 
-// Route for the specific vehicle detail page
-router.get("/detail/:invId", utilities.handleErrors(invController.buildByInvId));
-
-// Route to deliver the inventory management view
-router.get("/management", utilities.checkLogin, utilities.handleErrors(invController.buildInventoryManagement));
-// Route to deliver the add classification view
-router.get("/add-classification", utilities.checkLogin, utilities.handleErrors(invController.buildAddClassification));
-// Route to deliver the add vehicle view
+// Add Classification
+router.get(
+    "/add-classification",
+    utilities.handleErrors(invController.buildAddClassification)
+)
 router.post(
     "/add-classification",
-    utilities.checkLogin,
-    invValidate.classificationRules(),
-    invValidate.checkClassificationData,
     utilities.handleErrors(invController.addClassification)
 )
-//route to deliver the add inventory view
+
+// Add Inventory
 router.get(
     "/add-inventory",
-    utilities.checkLogin,
+    utilities.handleErrors(invController.buildAddInventory)
+)
+router.post(
+    "/add-inventory",
     utilities.handleErrors(invController.addInventory)
 )
-router.post(
-    "/add-inventory",
-    utilities.checkLogin,
-    invValidate.inventoryRules(),
-    invValidate.checkInventoryData,
-    utilities.handleErrors(invController.processAddInventory)
-)
-//route to edit inventory
+
+// View inventory by classification
 router.get(
-    "/edit/:invId",
-    utilities.checkLogin,
-    utilities.handleErrors(invController.buildEditInventory)
+    "/type/:classificationId",
+    utilities.handleErrors(invController.buildByClassificationId)
 )
-router.post(
-    "/edit",
-    utilities.checkLogin,
-    invValidate.inventoryRules(),
-    invValidate.checkUpdateData,
-    utilities.handleErrors(invController.updateInventory)
-)
+
+// View inventory detail page
 router.get(
-    "/delete/:inv_id",
-    utilities.checkLogin,
-    utilities.handleErrors(invController.buildDeleteInventory)
+    "/detail/:invId",
+    utilities.handleErrors(invController.buildByInvId)
 )
-router.post(
-    "/delete",
-    utilities.checkLogin,
-    utilities.handleErrors(invController.deleteInventory)
-)
-//this route returns JSON instead of rendering a view:
-router.get("/getInventory/:classification_id",
+
+// AJAX JSON route
+router.get(
+    "/getInventory/:classification_id",
     utilities.handleErrors(invController.getInventoryJSON)
 )
 
-module.exports = router;
+module.exports = router

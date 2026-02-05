@@ -1,4 +1,4 @@
-<% locals.title = "Inventory Management | CSE 340 App" %>
+<% locals.title = "Inventory Management" %>
 
 <main id="inventory-management">
 
@@ -9,44 +9,24 @@
         <div class="notice"><%= message %></div>
     <% } %>
 
-    <!-- Main management links -->
     <ul class="management-links">
         <li><a href="/inv/add-classification">Add New Classification</a></li>
         <li><a href="/inv/add-inventory">Add New Inventory Item</a></li>
     </ul>
 
     <h2>Manage Inventory</h2>
+
+    <!-- AJAX dropdown -->
     <label for="classificationSelect">Choose a Classification</label>
     <select id="classificationSelect">
-    <option value="">Select a classification</option>
-    <% classifications.forEach(c => { %>
-        <option value="<%= c.classification_id %>">
-        <%= c.classification_name %>
-        </option>
-    <% }) %>
+        <option value="">Select a classification</option>
+        <% classifications.forEach(c => { %>
+        <option value="<%= c.classification_id %>"><%= c.classification_name %></option>
+        <% }) %>
     </select>
 
     <div id="inventoryDisplay"></div>
 
     <script src="/js/inventory.js"></script>
-
-    <% if (inventory && inventory.length > 0) { %>
-    <ul class="inventory-list">
-        <% inventory.forEach(item => { %>
-        <li>
-            <span class="inventory-item-name">
-                <%= item.inv_make %> <%= item.inv_model %>
-            </span>
-
-            <span class="inventory-actions">
-                <a href="/inv/edit/<%= item.inv_id %>">Edit</a>
-                <a href="/inv/delete/<%= item.inv_id %>">Delete</a>
-            </span>
-        </li>
-        <% }) %>
-    </ul>
-    <% } else { %>
-    <p>No inventory items found.</p>
-    <% } %>
 
 </main>
