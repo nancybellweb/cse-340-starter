@@ -16,6 +16,19 @@
     </ul>
 
     <h2>Manage Inventory</h2>
+    <label for="classificationSelect">Choose a Classification</label>
+    <select id="classificationSelect">
+    <option value="">Select a classification</option>
+    <% classifications.forEach(c => { %>
+        <option value="<%= c.classification_id %>">
+        <%= c.classification_name %>
+        </option>
+    <% }) %>
+    </select>
+
+    <div id="inventoryDisplay"></div>
+
+    <script src="/js/inventory.js"></script>
 
     <% if (inventory && inventory.length > 0) { %>
     <ul class="inventory-list">

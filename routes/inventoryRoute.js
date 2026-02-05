@@ -60,5 +60,9 @@ router.post(
     utilities.checkLogin,
     utilities.handleErrors(invController.deleteInventory)
 )
+//this route returns JSON instead of rendering a view:
+router.get("/getInventory/:classification_id",
+    utilities.handleErrors(invController.getInventoryJSON)
+)
 
 module.exports = router;

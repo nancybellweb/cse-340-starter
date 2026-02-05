@@ -315,6 +315,14 @@ invCont.deleteInventory = async function (req, res, next) {
         res.redirect(`/inv/delete/${inv_id}`)
     }
 }
+/* ***************************
+ * Return Inventory as JSON
+ *************************** */
+invCont.getInventoryJSON = async function (req, res) {
+    const classification_id = req.params.classification_id
+    const data = await invModel.getInventoryByClassificationId(classification_id)
+    return res.json(data)
+}
 
 
 module.exports = invCont
