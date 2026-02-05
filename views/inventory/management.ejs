@@ -1,11 +1,7 @@
-
-    
 <% locals.title = "Inventory Management | CSE 340 App" %>
 
-
-
 <main id="inventory-management">
-    
+
     <h1>Inventory Management</h1>
 
     <!-- Flash message -->
@@ -13,19 +9,26 @@
         <div class="notice"><%= message %></div>
     <% } %>
 
-    <ul>
+    <!-- Main management links -->
+    <ul class="management-links">
         <li><a href="/inv/add-classification">Add New Classification</a></li>
         <li><a href="/inv/add-inventory">Add New Inventory Item</a></li>
     </ul>
+
     <h2>Manage Inventory</h2>
 
     <% if (inventory && inventory.length > 0) { %>
-    <ul>
+    <ul class="inventory-list">
         <% inventory.forEach(item => { %>
         <li>
-            <%= item.inv_make %> <%= item.inv_model %>
-            — <a href="/inv/edit/<%= item.inv_id %>">Edit</a>
-            <a href="/inv/delete/<%= item.inv_id %>">Delete</a>
+            <span class="inventory-item-name">
+                <%= item.inv_make %> <%= item.inv_model %>
+            </span>
+
+            <span class="inventory-actions">
+                <a href="/inv/edit/<%= item.inv_id %>">Edit</a>
+                <a href="/inv/delete/<%= item.inv_id %>">Delete</a>
+            </span>
         </li>
         <% }) %>
     </ul>
