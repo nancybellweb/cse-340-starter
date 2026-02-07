@@ -1,0 +1,23 @@
+<h1>Select Products</h1>
+
+<label for="classificationList">Choose a classification:</label>
+<select id="classificationList" name="classification_id">
+    <option value="">Select a classification</option>
+    <!-- Your server will insert real options -->
+    <%- classificationList %>
+    </select>
+
+    <table>
+    <thead>
+        <tr>
+        <th>Make</th>
+        <th>Model</th>
+        <th>Price</th>
+        </tr>
+    </thead>
+    <tbody id="inventoryDisplay">
+        <!-- JavaScript will insert rows here -->
+    </tbody>
+</table>
+
+<script src="/js/inventory.js"></script>

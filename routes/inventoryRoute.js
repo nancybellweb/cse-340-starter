@@ -52,5 +52,19 @@ router.get(
     "/getInventory/:classification_id",
     utilities.handleErrors(invController.getInventoryJSON)
 )
+//select product route
+router.get(
+    "/select",
+    utilities.handleErrors(async (req, res) => {
+        const nav = await utilities.getNav()
+        const classificationList = await utilities.buildClassificationList()
+
+        res.render("inventory/select-products", {
+        title: "Select Products",
+        nav,
+        classificationList
+        })
+    })
+)
 
 module.exports = router
