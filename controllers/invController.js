@@ -10,11 +10,13 @@ const invCont = {}
 invCont.buildInventoryManagement = async function (req, res, next) {
     try {
         const nav = await utilities.getNav()
+        const classificationList = await utilities.buildClassificationList()
         const classifications = await invModel.getClassifications()
-
+        
         res.render("inventory/management", {
         title: "Inventory Management",
         nav,
+        classificationList,
         classifications,
         message: req.flash("notice")
         })
@@ -26,7 +28,7 @@ invCont.buildInventoryManagement = async function (req, res, next) {
     /* ***************************
     *  Add Classification View
     * ************************** */
-    invCont.buildAddClassification = async function (req, res, next) {
+invCont.buildAddClassification = async function (req, res, next) {
     const nav = await utilities.getNav()
     res.render("inventory/add-classification", {
         title: "Add Classification",
@@ -38,7 +40,7 @@ invCont.buildInventoryManagement = async function (req, res, next) {
     /* ***************************
     *  Process Add Classification
     * ************************** */
-    invCont.addClassification = async function (req, res, next) {
+invCont.addClassification = async function (req, res, next) {
     const { classification_name } = req.body
 
     try {

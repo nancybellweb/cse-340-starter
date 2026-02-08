@@ -13,20 +13,21 @@
         <li><a href="/inv/add-classification">Add New Classification</a></li>
         <li><a href="/inv/add-inventory">Add New Inventory Item</a></li>
     </ul>
-
+<!-- AJAX dropdown -->
     <h2>Manage Inventory</h2>
-
-    <!-- AJAX dropdown -->
-    <label for="classificationSelect">Choose a Classification</label>
-    <select id="classificationSelect">
-        <option value="">Select a classification</option>
-        <% classifications.forEach(c => { %>
-        <option value="<%= c.classification_id %>"><%= c.classification_name %></option>
-        <% }) %>
+    <p> Select a classification to view inventory:</p>
+    
+    <label for="classificationList">Choose a Classification</label>
+    <select id="classificationList" name="classification_id">
+    <option value="">Select a classification</option>
+            <%- classificationList %>
     </select>
 
-    <div id="inventoryDisplay"></div>
+
+    <table id="inventoryDisplay"></table>
+
 
     <script src="/js/inventory.js"></script>
+    <noscript>JavaScript must be enabled to use this page.</noscript>
 
 </main>

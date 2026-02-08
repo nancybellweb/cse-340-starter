@@ -1,11 +1,14 @@
 // Wait for the DOM to load
+
 document.addEventListener("DOMContentLoaded", () => {
     const classificationList = document.getElementById("classificationList")
+    console.log("classificationList element:", classificationList)
+
     const inventoryDisplay = document.getElementById("inventoryDisplay")
 
     classificationList.addEventListener("change", async () => {
         const classificationId = classificationList.value
-
+        console.log("Selected ID:", classificationId)
         // Clear display if nothing selected
         if (!classificationId) {
         inventoryDisplay.innerHTML = ""
