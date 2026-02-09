@@ -190,12 +190,16 @@ invCont.addInventory = async function (req, res, next) {
 }
 
 /* ***************************
- *  JSON Inventory Route (AJAX)
+ *  Return Inventory by Classification As JSON
  * ************************** */
-invCont.getInventoryJSON = async function (req, res) {
-    const classification_id = req.params.classification_id
-    const data = await invModel.getInventoryByClassificationId(classification_id)
-    return res.json(data)
+invCont.getInventoryJSON = async (req, res, next) => {
+    const classification_id = parseInt(req.params.classification_id)
+    const invData = await invModel.getInventoryByClassificationId(classification_id)
+    if (invData[0].inv_id) {
+        return res.json(invData)
+    } else {
+        next(new Error("No data returned"))
+    }
 }
 
 module.exports = invCont
