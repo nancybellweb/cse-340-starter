@@ -23,22 +23,35 @@
     })
 
     // Build inventory items into HTML table components and inject into DOM 
-function buildInventoryList(data) { 
-    let inventoryDisplay = document.getElementById("inventoryDisplay"); 
-    // Set up the table labels 
-    let dataTable = '<thead>'; 
-    dataTable += '<tr><th>Vehicle Name</th><td>&nbsp;</td><td>&nbsp;</td></tr>'; 
-    dataTable += '</thead>'; 
-    // Set up the table body 
-    dataTable += '<tbody>'; 
-    // Iterate over all vehicles in the array and put each in a row 
-    data.forEach(function (element) { 
-    console.log(element.inv_id + ", " + element.inv_model); 
-    dataTable += `<tr><td>${element.inv_make} ${element.inv_model}</td>`; 
-    dataTable += `<td><a href='/inv/edit/${element.inv_id}' title='Click to update'>Modify</a></td>`; 
-    dataTable += `<td><a href='/inv/delete/${element.inv_id}' title='Click to delete'>Delete</a></td></tr>`; 
-    }) 
-    dataTable += '</tbody>'; 
-    // Display the contents in the Inventory Management view 
-    inventoryDisplay.innerHTML = dataTable; 
+function buildInventoryList(data) {
+    let inventoryDisplay = document.getElementById("inventoryDisplay");
+
+    let dataTable = `
+        <table class="inventory-table">
+        <thead>
+            <tr>
+            <th>Vehicle Name</th>
+            <th>Modify</th>
+            <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+    `;
+
+    data.forEach(function (element) {
+        dataTable += `
+        <tr>
+            <td>${element.inv_make} ${element.inv_model}</td>
+            <td><a class="table-action modify" href="/inv/edit/${element.inv_id}">Modify</a></td>
+            <td><a class="table-action delete" href="/inv/delete/${element.inv_id}">Delete</a></td>
+        </tr>
+        `;
+    });
+
+    dataTable += `
+        </tbody>
+        </table>
+    `;
+
+    inventoryDisplay.innerHTML = dataTable;
 }

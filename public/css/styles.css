@@ -635,7 +635,7 @@ label[for="classificationList"] {
 }
 .table-action.modify {
   background: #e6f4ff;
-  border-color: #bfe3ff;
+  border-color: #60a5fa;
 }
 .table-action.delete {
   background: #fff5f5;
@@ -650,6 +650,89 @@ label[for="classificationList"] {
   background: #f8fafc;
   padding: 10px 12px;
   border-radius: 8px;
+}
+/* Inventory Table (AJAX Results) */
+#inventoryDisplay table,
+.inventory-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 18px;
+  background: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(20, 30, 40, 0.06);
+  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Table Header */
+#inventoryDisplay table thead th,
+.inventory-table thead th {
+  text-align: left;
+  padding: 12px 14px;
+  background: #f8fafc;
+  color: #0f172a;
+  border-bottom: 2px solid #e6eef8;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+/* Table Cells */
+#inventoryDisplay table tbody td,
+.inventory-table tbody td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #eef2f7;
+  color: #111827;
+  font-size: 0.95rem;
+}
+
+/* Hover Row */
+#inventoryDisplay table tbody tr:hover,
+.inventory-table tbody tr:hover {
+  background: #fbfdff;
+  transition: background 120ms ease;
+}
+
+/* Modify/Delete Links */
+.table-action {
+  display: inline-block;
+  padding: 6px 10px;
+  margin-left: 6px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  text-decoration: none;
+  border: 1px solid transparent;
+  font-weight: 600;
+}
+
+.table-action.modify {
+  background: #e6f4ff;
+  border-color: #bfe3ff;
+  color: #0f172a;
+}
+
+.table-action.modify:hover {
+  background: #d8ecff;
+}
+
+.table-action.delete {
+  background: #fff5f5;
+  border-color: #ffd6d6;
+  color: #7f1d1d;
+}
+
+.table-action.delete:hover {
+  background: #ffecec;
+}
+
+/* Empty State */
+#inventoryDisplay p {
+  margin-top: 16px;
+  padding: 12px 14px;
+  background: #f8fafc;
+  border-radius: 8px;
+  color: #475569;
+  border: 1px solid #e6eef8;
+  font-size: 0.95rem;
 }
 
 
@@ -695,6 +778,26 @@ label[for="classificationList"] {
     #addClassificationForm {
     padding: 18px;
     margin: 16px;
+  }
+  #inventoryDisplay table,
+  .inventory-table {
+    font-size: 0.9rem;
+  }
+  #inventoryDisplay table thead {
+    display: none; /* optional mobile-friendly stacked layout */
+  }
+  #inventoryDisplay table tr {
+    display: block;
+    margin-bottom: 12px;
+    border: 1px solid #e6eef8;
+    border-radius: 8px;
+    padding: 10px;
+  }
+  #inventoryDisplay table td {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 6px;
+    border-bottom: none;
   }
 }
 
