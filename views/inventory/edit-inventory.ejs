@@ -1,4 +1,3 @@
-<%- include('../partials/header.ejs') %>
 
 <h1>Edit Inventory</h1>
 
@@ -39,6 +38,8 @@
     <input type="text" id="inv_color" name="inv_color" value="<%= inv_color %>" required>
 
     <button type="submit">Update Inventory</button>
+    <input type="hidden" name="inv_id"
+    <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+    <% } %>>
 </form>
 
-<%- include('../partials/footer.ejs') %>
