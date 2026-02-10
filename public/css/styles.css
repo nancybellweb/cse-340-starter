@@ -251,46 +251,7 @@ nav ul li a:hover {
   padding: 10px;
 }
 
-@media screen and (min-width: 600px) {
-    .hero-details {
-    position: absolute; 
-    top: 50px;
-    left: 50px;
-    width: 250px;
-  }
-  
-  .hero-container img {
 
-    margin-left: auto;
-    display: block;
-    width: 80%;
-  }
-  .vehicle-details {
-    flex-direction: row; /* Side-by-side on desktop */
-    align-items: flex-start;
-  }
-  .vehicle-details img {
-    max-width: 50%;
-  }
-    #inventory-management {
-    padding: 16px;
-    margin: 16px;
-  }
-  .management-links {
-    flex-direction: column;
-    gap: 8px;
-  }
-  #classificationList {
-    max-width: 100%;
-  }
-    .form-grid {
-    grid-template-columns: 1fr;
-  }
-  #addInventoryForm {
-    padding: 16px;
-    margin: 12px;
-  }
-}
 
 /* Login Form styling */
 
@@ -482,6 +443,90 @@ input:required:valid {
   margin-top: 6px;
 }
 
+/* Add Classification Page Wrapper */
+#add-classification {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 16px;
+  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: #0f172a;
+}
+
+/* Form Container */
+#addClassificationForm {
+  max-width: 520px;
+  margin: 28px auto;
+  padding: 24px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(16,24,40,0.06);
+}
+
+/* Labels */
+#addClassificationForm label {
+  display: block;
+  margin: 12px 0 6px 0;
+  font-weight: 600;
+  color: #0f172a;
+  font-size: 0.95rem;
+}
+
+/* Input */
+#addClassificationForm input[type="text"] {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: linear-gradient(180deg,#fff,#fbfdff);
+  font-size: 1rem;
+  color: #0f172a;
+  box-shadow: 0 1px 0 rgba(16,24,40,0.02) inset;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+
+#addClassificationForm input[type="text"]:focus {
+  outline: none;
+  border-color: #60a5fa;
+  box-shadow: 0 4px 14px rgba(96,165,250,0.12);
+}
+
+/* Submit Button */
+#addClassificationForm button[type="submit"] {
+  margin-top: 18px;
+  padding: 10px 16px;
+  background: linear-gradient(180deg,#0f172a,#0b1220);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 1rem;
+  box-shadow: 0 8px 18px rgba(11,18,32,0.12);
+}
+
+#addClassificationForm button[type="submit"]:hover {
+  transform: translateY(-2px);
+  transition: transform 120ms ease;
+}
+
+/* Flash Messages */
+.notice,
+.form-error {
+  margin: 12px auto;
+  max-width: 520px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #f8fafc;
+  color: #0f172a;
+  border: 1px solid #e6eef8;
+}
+
+.form-error {
+  background: #fff5f5;
+  color: #7f1d1d;
+  border-color: #ffd6d6;
+}
+
 
 
 /* Inventory Management styles */
@@ -605,5 +650,51 @@ label[for="classificationList"] {
   background: #f8fafc;
   padding: 10px 12px;
   border-radius: 8px;
+}
+
+
+@media screen and (min-width: 600px) {
+    .hero-details {
+    position: absolute; 
+    top: 50px;
+    left: 50px;
+    width: 250px;
+  }
+  
+  .hero-container img {
+
+    margin-left: auto;
+    display: block;
+    width: 80%;
+  }
+  .vehicle-details {
+    flex-direction: row; /* Side-by-side on desktop */
+    align-items: flex-start;
+  }
+  .vehicle-details img {
+    max-width: 50%;
+  }
+    #inventory-management {
+    padding: 16px;
+    margin: 16px;
+  }
+  .management-links {
+    flex-direction: column;
+    gap: 8px;
+  }
+  #classificationList {
+    max-width: 100%;
+  }
+    .form-grid {
+    grid-template-columns: 1fr;
+  }
+  #addInventoryForm {
+    padding: 16px;
+    margin: 12px;
+  }
+    #addClassificationForm {
+    padding: 18px;
+    margin: 16px;
+  }
 }
 
