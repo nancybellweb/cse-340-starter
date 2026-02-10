@@ -81,24 +81,22 @@ Util.buildClassificationGrid = async function (data) {
  * Build the vehicle detail HTML
  * Used by invCont.buildByInvId
  **************************************** */
-Util.buildVehicleDetail = async function (data) {
-    const price = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(data.inv_price || 0)
-    const miles = new Intl.NumberFormat('en-US').format(data.inv_miles || 0)
+// utilities/index.js (or wherever Util.buildClassificationList is defined)
+// utilities/index.js (or wherever Util.buildClassificationList is defined)
+Util.buildClassificationList = async function (selectedId = null) {
+    const data = await invModel.getClassifications()
+    let list = '' 
 
-    let display = '<section class="vehicle-detail">'
-    display += `<img src="${data.inv_image || '/images/no-image.png'}" alt="${data.inv_make} ${data.inv_model}">`
-    display += '<div class="detail-text">'
-    display += `<h2>${data.inv_make} ${data.inv_model}</h2>`
-    display += `<p><strong>Price:</strong> ${price}</p>`
-    display += `<p><strong>Miles:</strong> ${miles}</p>`
-    display += `<p><strong>Description:</strong> ${data.inv_description || "No description available."}</p>`
-    display += `<p><strong>Color:</strong> ${data.inv_color || "N/A"}</p>`
-    display += '</div>'
-    display += '</section>'
+    data.forEach((row) => {
+        list += `<option value="${row.classification_id}"`
+        if (selectedId == row.classification_id) {
+        list += ' selected'
+        }
+        list += `>${row.classification_name}</option>`
+    })
 
-    return display
+    return list
 }
-
 /* ***************************
  * Middleware for handling async errors
  * ************************** */

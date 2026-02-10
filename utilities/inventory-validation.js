@@ -90,7 +90,11 @@ invValidate.inventoryRules = () => {
  **************************************** */
 invValidate.checkInventoryData = async (req, res, next) => {
     const errors = validationResult(req)
-    const classificationList = await utilities.buildClassificationList()
+    // Rebuild dropdown with selected value
+    const classificationList = await utilities.buildClassificationList(
+        req.body.classification_id
+    )
+
 
     if (!errors.isEmpty()) {
         let nav = await utilities.getNav()
