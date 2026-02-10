@@ -1,3 +1,4 @@
+const { parse } = require("dotenv")
 const invModel = require("../models/inventory-model")
 const utilities = require("../utilities/")
 
@@ -201,5 +202,33 @@ invCont.getInventoryJSON = async (req, res, next) => {
         next(new Error("No data returned"))
     }
 }
+/* ***************************
+ *  edit inventory view - update button controller / Management view
+ * ************************** */
+invCont.buildEditInventory = async function (req, res, next) {
+    const inv_id = parseInt(req.params.inv_id)
+    let nav = await utilities.getNav()
+    const inventoryData = await invModel.getInventoryByInvId(inv_id)
+    const classificationList = await utilities.buildClassificationList(inventoryData.classification_id)
+    const itemName = `${inventoryData.inv_make} ${inventoryData.inv_model}`
+    res.render("inventory/edit-inventory", {
+        title: `Edit ${itemName}`,
+        nav,
+        classificationSelect: classificationList,
+        errors: null,
+        inv_id: inventoryData.inv_id,
+        inv_make: inventoryData.inv_make,
+        inv_model: inventoryData.inv_model,
+        inv_year: inventoryData.inv_year,    
+        inv_description: inventoryData.inv_description,
+        inv_image: inventoryData.inv_image,
+        inv_thumbnail: inventoryData.inv_thumbnail,
+        inv_price: inventoryData.inv_price,
+        inv_miles: inventoryData.inv_miles,
+        inv_color: inventoryData.inv_color,
+        classification_id: inventoryData.classification_id
+    })
+}
+
 
 module.exports = invCont
