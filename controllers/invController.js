@@ -209,6 +209,13 @@ invCont.buildEditInventory = async function (req, res, next) {
     const inv_id = parseInt(req.params.inv_id)
     let nav = await utilities.getNav()
     const inventoryData = await invModel.getInventoryByInvId(inv_id)
+    // Temporary debug - log the retrieved inventory data
+    console.log("Retrieved inventory data:", inventoryData)
+        if (!inventoryData) {
+        req.flash("notice", "Vehicle not found.")
+        return res.redirect("/inv/management")
+    }
+
     const classificationList = await utilities.buildClassificationList(inventoryData.classification_id)
     const itemName = `${inventoryData.inv_make} ${inventoryData.inv_model}`
     res.render("inventory/edit-inventory", {
@@ -292,10 +299,9 @@ invCont.updateInventory = async function (req, res, next) {
         })
     }
 }
-/* ***************************
- *  Show confirmation page for inventory deletion
- * ************************** */
-
+/* ****************************************
+* Build delete confirmation view
+**************************************** */
 invCont.buildDeleteInventory = async function (req, res, next) {
     const inv_id = parseInt(req.params.inv_id)
     let nav = await utilities.getNav()
@@ -311,12 +317,14 @@ invCont.buildDeleteInventory = async function (req, res, next) {
         inv_make: itemData.inv_make,
         inv_model: itemData.inv_model,
         inv_year: itemData.inv_year,
+        inv_price: itemData.inv_price, 
         inv_description: itemData.inv_description
     })
 }
-/* ***************************
- *  Process Inventory Deletion
- * ************************** */
+
+/* ****************************************
+* Delete inventory item
+**************************************** */
 invCont.deleteInventory = async function (req, res, next) {
     const inv_id = parseInt(req.body.inv_id)
 
@@ -330,4 +338,5 @@ invCont.deleteInventory = async function (req, res, next) {
         return res.redirect(`/inv/delete/${inv_id}`)
     }
 }
+
 module.exports = invCont

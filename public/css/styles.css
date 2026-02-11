@@ -879,19 +879,82 @@ label[for="classificationList"] {
   resize: vertical;
 }
 
+.delete-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+
 .delete-btn {
   background: #cc0000;
   color: white;
-  padding: 0.75rem 1rem;
+  padding: 0.6rem 1rem;
   border: none;
   border-radius: 4px;
-  font-size: 1rem;
   cursor: pointer;
   font-weight: bold;
-  transition: background 0.2s ease;
+  width: 100%;
+  margin-top: 1rem;
 }
 
 .delete-btn:hover {
+  background: #990000;
+}
+
+
+/* Modal Styling */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.55);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  transition: opacity 0.2s ease;
+}
+
+.modal-box {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 6px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+}
+
+.modal-cancel {
+  background: #ccc;
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.modal-cancel:hover {
+  background: #b3b3b3;
+}
+
+.modal-delete {
+  background: #cc0000;
+  color: white;
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.modal-delete:hover {
   background: #990000;
 }
 
