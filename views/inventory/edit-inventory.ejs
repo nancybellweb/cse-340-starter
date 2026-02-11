@@ -34,7 +34,9 @@
 
     <label for="inv_color">Color</label>
     <input type="text" id="inv_color" name="inv_color" value="<%= inv_color %>" required>
-
+    <p id="updateMessage" class="update-disabled-message">
+    Make a change to enable the Update button.
+    </p>
     <button type="submit" disabled>Update Inventory</button>
 <input type="hidden" name="inv_id" value="<%= inv_id %>">
 </form>

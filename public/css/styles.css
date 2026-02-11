@@ -829,6 +829,14 @@ label[for="classificationList"] {
   padding: 16px;
 }
 
+/* Disable Update Button Message */
+.update-disabled-message {
+  color: #555;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  opacity: 0.8;
+}
+
 /* Responsive */
 @media (max-width: 720px) {
   #updateForm {
