@@ -80,4 +80,19 @@ router.post(
     invValidate.checkUpdateData,
     utilities.handleErrors(invController.updateInventory))
 
+// Route to delete inventory item
+router.get(
+    "/delete/:inv_id",
+    utilities.checkLogin,
+    utilities.checkEmployee,
+    utilities.handleErrors(invController.buildDeleteInventory)
+)
+// Post to handle delete inventory item
+router.post(
+    "/delete",
+    utilities.checkLogin,
+    utilities.checkEmployee,
+    utilities.handleErrors(invController.deleteInventory)
+)
+
 module.exports = router
