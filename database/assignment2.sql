@@ -7,7 +7,7 @@ INSERT INTO account (
 	account_lastname,
 	account_email,
 	account_password
-)))
+)
 
 VALUES (
 	'Tony',
