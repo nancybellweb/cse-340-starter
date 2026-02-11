@@ -3,7 +3,6 @@
 const { body, validationResult } = require("express-validator")
 const utilities = require(".")
 const invValidate = {}
-
 /* ****************************************
  * Classification Validation Rules
  **************************************** */
@@ -108,6 +107,60 @@ invValidate.checkInventoryData = async (req, res, next) => {
     }
     next()
 }
+
+/* ******************************
+ * Update Inventory Validation Rules
+ ****************************** */
+invValidate.updateInventoryRules = () => {
+    return [
+        body("inv_make")
+        .trim()
+        .isLength({ min: 1 })
+        .withMessage("Please provide a make."),
+
+        body("inv_model")
+        .trim()
+        .isLength({ min: 1 })
+        .withMessage("Please provide a model."),
+
+        body("inv_year")
+        .isInt({ min: 1900, max: 2100 })
+        .withMessage("Enter a valid year."),
+
+        body("inv_description")
+        .trim()
+        .isLength({ min: 1 })
+        .withMessage("Please provide a description."),
+
+        body("inv_image")
+        .trim()
+        .isLength({ min: 1 })
+        .withMessage("Please provide an image path."),
+
+        body("inv_thumbnail")
+        .trim()
+        .isLength({ min: 1 })
+        .withMessage("Please provide a thumbnail path."),
+
+        body("inv_price")
+        .isFloat()
+        .withMessage("Enter a valid price."),
+
+        body("inv_miles")
+        .isInt()
+        .withMessage("Enter valid miles."),
+
+        body("inv_color")
+        .trim()
+        .isLength({ min: 1 })
+        .withMessage("Please provide a color."),
+
+        body("classification_id")
+        .isInt()
+        .withMessage("Choose a classification.")
+    ]
+}
+
 
 /* ******************************
  * Check update data and return errors

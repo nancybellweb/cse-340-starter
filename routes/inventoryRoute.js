@@ -1,9 +1,11 @@
+
 /// routes/inventoryRoute.js
 const express = require("express")
 const router = new express.Router()
 const invController = require("../controllers/invController")
 const utilities = require("../utilities/")
-
+const invValidate = require("../utilities/inventory-validation")
+console.log("invValidate =", invValidate) 
 // Test route to confirm router loads
 router.get("/test", (req, res) => {
     res.send("inventoryRoute loaded")
