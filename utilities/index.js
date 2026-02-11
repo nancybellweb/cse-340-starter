@@ -121,6 +121,29 @@ Util.checkJWTToken = (req, res, next) => {
         next()
     }
     }
+const jwt = require("jsonwebtoken")
+
+Util.checkJWTToken = (req, res, next) => {
+    if (req.cookies.jwt) {
+        jwt.verify(
+        req.cookies.jwt,
+        process.env.ACCESS_TOKEN_SECRET,
+        (err, accountData) => {
+            if (err) {
+            res.clearCookie("jwt")
+            res.locals.loggedin = false
+            return next()
+            }
+            res.locals.loggedin = true
+            res.locals.accountData = accountData
+            return next()
+        }
+        )
+    } else {
+        res.locals.loggedin = false
+        next()
+    }
+}
 
 module.exports = Util
 

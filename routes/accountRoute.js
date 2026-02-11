@@ -22,6 +22,12 @@ router.post(
     "/login",
     utilities.handleErrors(accountController.loginAccount)
 )
+// Process the logout
+router.get("/logout", (req, res) => {
+    res.clearCookie("jwt")
+    req.flash("notice", "You have been logged out.")
+    res.redirect("/")
+})
 
 
 module.exports = router

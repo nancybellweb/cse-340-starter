@@ -84,7 +84,8 @@ app.use("/account", accountRoute)
  * Index route
  *************************/
 app.get("/", utilities.handleErrors(baseController.buildHome))
-
+//checkJWTToken
+app.use(utilities.checkJWTToken)
 
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
