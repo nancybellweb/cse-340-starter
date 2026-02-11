@@ -836,6 +836,64 @@ label[for="classificationList"] {
   margin-bottom: 0.5rem;
   opacity: 0.8;
 }
+/* Delete Page Styling */
+.delete-title {
+  color: #b30000;
+  margin-bottom: 0.5rem;
+}
+
+.delete-warning {
+  background: #ffe6e6;
+  border-left: 4px solid #cc0000;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.5rem;
+  color: #660000;
+  font-size: 0.95rem;
+}
+
+.delete-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 500px;
+}
+
+.delete-field label {
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+  display: block;
+}
+
+.delete-field input[readonly],
+.delete-field textarea[readonly] {
+  background: #f7f7f7;
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+  width: 100%;
+  border-radius: 4px;
+  color: #555;
+}
+
+.delete-field textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.delete-btn {
+  background: #cc0000;
+  color: white;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s ease;
+}
+
+.delete-btn:hover {
+  background: #990000;
+}
 
 /* Responsive */
 @media (max-width: 720px) {
