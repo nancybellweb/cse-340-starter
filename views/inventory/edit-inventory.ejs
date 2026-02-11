@@ -1,7 +1,7 @@
 
 <h1>Edit Inventory</h1>
 
-<form action="/inv/update" method="post" id="editInventoryForm">
+<form action="/inv/update" method="post" id="updateForm">
 
     <label for="classificationList">Classification</label>
     <select id="classification_id" name="classification_id" required>
@@ -35,7 +35,8 @@
     <label for="inv_color">Color</label>
     <input type="text" id="inv_color" name="inv_color" value="<%= inv_color %>" required>
 
-    <button type="submit">Update Inventory</button>
+    <button type="submit" disabled>Update Inventory</button>
 <input type="hidden" name="inv_id" value="<%= inv_id %>">
 </form>
 
+<script src="/js/inv-update.js"></script>

@@ -735,7 +735,7 @@ label[for="classificationList"] {
   font-size: 0.95rem;
 }
 /* Edit Inventory Form */
-#editInventoryForm {
+#updateForm {
   max-width: 620px;
   margin: 28px auto;
   padding: 24px;
@@ -747,7 +747,7 @@ label[for="classificationList"] {
 }
 
 /* Labels */
-#editInventoryForm label {
+#updateForm label {
   display: block;
   margin: 12px 0 6px 0;
   font-weight: 600;
@@ -756,10 +756,10 @@ label[for="classificationList"] {
 }
 
 /* Inputs, Selects, Textareas */
-#editInventoryForm input[type="text"],
-#editInventoryForm input[type="number"],
-#editInventoryForm select,
-#editInventoryForm textarea {
+#updateForm input[type="text"],
+#updateForm input[type="number"],
+#updateForm select,
+#updateForm textarea {
   width: 100%;
   padding: 10px 12px;
   border: 1px solid #d1d5db;
@@ -771,22 +771,22 @@ label[for="classificationList"] {
   transition: border-color 120ms ease, box-shadow 120ms ease;
 }
 
-#editInventoryForm input:focus,
-#editInventoryForm select:focus,
-#editInventoryForm textarea:focus {
+#updateForm input:focus,
+#updateForm select:focus,
+#updateForm textarea:focus {
   outline: none;
   border-color: #60a5fa;
   box-shadow: 0 4px 14px rgba(96,165,250,0.12);
 }
 
 /* Textarea height */
-#editInventoryForm textarea {
+#updateForm textarea {
   min-height: 90px;
   resize: vertical;
 }
 
 /* Submit Button */
-#editInventoryForm button[type="submit"] {
+#updateForm button[type="submit"] {
   margin-top: 18px;
   padding: 10px 16px;
   background: linear-gradient(180deg,#0f172a,#0b1220);
@@ -799,7 +799,7 @@ label[for="classificationList"] {
   box-shadow: 0 8px 18px rgba(11,18,32,0.12);
 }
 
-#editInventoryForm button[type="submit"]:hover {
+#updateForm button[type="submit"]:hover {
   transform: translateY(-2px);
   transition: transform 120ms ease;
 }
@@ -831,7 +831,7 @@ label[for="classificationList"] {
 
 /* Responsive */
 @media (max-width: 720px) {
-  #editInventoryForm {
+  #updateForm {
     padding: 18px;
     margin: 16px;
   }
@@ -858,9 +858,9 @@ label[for="classificationList"] {
   .vehicle-details img {
     max-width: 50%;
   }
-    #inventory-management {
-    padding: 16px;
-    margin: 16px;
+  #inventory-management {
+  padding: 16px;
+  margin: 16px;
   }
   .management-links {
     flex-direction: column;
@@ -872,13 +872,13 @@ label[for="classificationList"] {
     .form-grid {
     grid-template-columns: 1fr;
   }
-  #addInventoryForm {
+  #updateForm {
     padding: 16px;
     margin: 12px;
   }
-    #addClassificationForm {
-    padding: 18px;
-    margin: 16px;
+  #addClassificationForm {
+  padding: 18px;
+  margin: 16px;
   }
   #inventoryDisplay table,
   .inventory-table {
