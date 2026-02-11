@@ -108,6 +108,7 @@ invValidate.checkInventoryData = async (req, res, next) => {
     }
     next()
 }
+
 /* ******************************
  * Check update data and return errors
  ****************************** */
@@ -120,13 +121,14 @@ invValidate.checkUpdateData = async (req, res, next) => {
         const classificationList = await utilities.buildClassificationList(
         req.body.classification_id
         )
+        const itemName = `${req.body.inv_make} ${req.body.inv_model}`
 
         // Re-render the edit form with sticky values and errors
         return res.render("inventory/edit-inventory", {
-        title: `Edit ${req.body.inv_make} ${req.body.inv_model}`,
+        title: `Edit ${itemName}`,
         nav,
-        classificationList,
-        errors: errors.array(),
+        classificationSelect:classificationList,
+        errors,
         ...req.body
         })
     }
