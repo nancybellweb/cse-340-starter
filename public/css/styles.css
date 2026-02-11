@@ -836,7 +836,11 @@ label[for="classificationList"] {
   margin-bottom: 0.5rem;
   opacity: 0.8;
 }
-/* Delete Page Styling */
+/* ================================
+    DELETE PAGE
+================================ */
+
+/* Title + Warning */
 .delete-title {
   color: #b30000;
   margin-bottom: 0.5rem;
@@ -849,8 +853,10 @@ label[for="classificationList"] {
   margin-bottom: 1.5rem;
   color: #660000;
   font-size: 0.95rem;
+  border-radius: 4px;
 }
 
+/* Form Layout */
 .delete-form {
   display: flex;
   flex-direction: column;
@@ -858,14 +864,14 @@ label[for="classificationList"] {
   max-width: 500px;
 }
 
+/* Field Styling */
 .delete-field label {
   font-weight: bold;
   margin-bottom: 0.25rem;
   display: block;
 }
 
-.delete-field input[readonly],
-.delete-field textarea[readonly] {
+.delete-field input[readonly] {
   background: #f7f7f7;
   border: 1px solid #ccc;
   padding: 0.5rem;
@@ -874,36 +880,49 @@ label[for="classificationList"] {
   color: #555;
 }
 
-.delete-field textarea {
-  min-height: 100px;
-  resize: vertical;
-}
-
+/* Action Buttons */
 .delete-actions {
   display: flex;
-  justify-content: space-between;
+  gap: 1rem;
   margin-top: 1rem;
 }
 
-
-.delete-btn {
-  background: #cc0000;
-  color: white;
+.delete-btn,
+.cancel-btn {
   padding: 0.6rem 1rem;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-weight: bold;
-  width: 100%;
-  margin-top: 1rem;
+  flex: 1; /* Makes them equal width */
+  text-align: center;
+}
+
+/* Delete Button */
+.delete-btn {
+  background: #cc0000;
+  color: white;
 }
 
 .delete-btn:hover {
   background: #990000;
 }
 
+/* Cancel Button */
+.cancel-btn {
+  background: #ccc;
+  color: #333;
+  text-decoration: none;
+}
 
-/* Modal Styling */
+.cancel-btn:hover {
+  background: #b3b3b3;
+}
+
+/* ================================
+    MODAL
+================================ */
+
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -933,12 +952,16 @@ label[for="classificationList"] {
   margin-top: 1.5rem;
 }
 
-.modal-cancel {
-  background: #ccc;
+.modal-cancel,
+.modal-delete {
   padding: 0.6rem 1rem;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+}
+
+.modal-cancel {
+  background: #ccc;
 }
 
 .modal-cancel:hover {
@@ -948,16 +971,11 @@ label[for="classificationList"] {
 .modal-delete {
   background: #cc0000;
   color: white;
-  padding: 0.6rem 1rem;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
 }
 
 .modal-delete:hover {
   background: #990000;
 }
-
 /* Responsive */
 @media (max-width: 720px) {
   #updateForm {
