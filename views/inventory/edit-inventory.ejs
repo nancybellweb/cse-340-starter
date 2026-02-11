@@ -3,8 +3,6 @@
 
 <form action="/inv/update" method="post" id="editInventoryForm">
 
-    <input type="hidden" name="inv_id" value="<%= inv_id %>">
-
     <label for="classificationList">Classification</label>
     <select id="classification_id" name="classification_id" required>
     <option value="">Choose a Classification</option>
@@ -38,8 +36,6 @@
     <input type="text" id="inv_color" name="inv_color" value="<%= inv_color %>" required>
 
     <button type="submit">Update Inventory</button>
-    <input type="hidden" name="inv_id"
-    <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
-    <% } %>>
+<input type="hidden" name="inv_id" value="<%= inv_id %>">
 </form>
 

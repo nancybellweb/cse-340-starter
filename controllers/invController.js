@@ -267,7 +267,7 @@ invCont.updateInventory = async function (req, res, next) {
         // if the model returns just a success flag, use body values:
         const itemName = `${inv_make} ${inv_model}`
         req.flash("notice", `The ${itemName} was successfully updated.`)
-        return res.redirect("/inv/")
+        return res.redirect("/inv/management")
     } else {
         const classificationSelect = await utilities.buildClassificationList(classification_id)
         const itemName = `${inv_make} ${inv_model}`
