@@ -109,6 +109,8 @@ async function loginAccount(req, res) {
         throw new Error('Access Forbidden')
     }
 }
+
+// account management view
 async function buildAccountManagement(req, res) {
     const nav = await utilities.getNav()
     const accountData = res.locals.accountData
@@ -120,6 +122,9 @@ async function buildAccountManagement(req, res) {
         errors: null
     })
 }
+
+// update account view
+
 async function buildUpdateAccount(req, res) {
     const nav = await utilities.getNav()
     const account_id = req.params.account_id
@@ -133,7 +138,68 @@ async function buildUpdateAccount(req, res) {
     })
 }
 
-module.exports = { buildLogin, buildRegister, registerAccount, loginAccount, buildAccountManagement, buildUpdateAccount }
+// update account information
+async function updateAccount(req, res) {
+    const { account_firstname, account_lastname, account_email, account_id } = req.body
+
+    const updateResult = await accountModel.updateAccount(
+        account_firstname,
+        account_lastname,
+        account_email,
+        account_id
+    )
+
+    if (updateResult) {
+        req.flash("notice", "Account information updated successfully.")
+    } else {
+        req.flash("notice", "Update failed. Please try again.")
+    }
+
+    const nav = await utilities.getNav()
+    const accountData = await accountModel.getAccountById(account_id)
+
+    return res.render("account/management", {
+        title: "Account Management",
+        nav,
+        accountData,
+        errors: null
+    })
+}
+
+// update password
+
+async function updatePassword(req, res) {
+    const { account_password, account_id } = req.body
+
+    const hashedPassword = await bcrypt.hash(account_password, 10)
+
+    const updateResult = await accountModel.updatePassword(hashedPassword, account_id)
+
+    if (updateResult) {
+        req.flash("notice", "Password updated successfully.")
+    } else {
+        req.flash("notice", "Password update failed.")
+    }
+
+    const nav = await utilities.getNav()
+    const accountData = await accountModel.getAccountById(account_id)
+
+    return res.render("account/management", {
+        title: "Account Management",
+        nav,
+        accountData,
+        errors: null
+    })
+}
+
+//Logout function
+async function logout(req, res) {
+    res.clearCookie("jwt")
+    req.flash("notice", "You have been logged out.")
+    return res.redirect("/")
+}
+
+module.exports = { buildLogin, buildRegister, registerAccount, loginAccount, buildAccountManagement, buildUpdateAccount, updateAccount, updatePassword, logout }
 
 
 

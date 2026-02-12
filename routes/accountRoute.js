@@ -60,5 +60,13 @@ router.post(
     utilities.handleErrors(accountController.updatePassword)
 )
 
+// Logout route
+router.get(
+    "/logout",
+    utilities.checkLogin,
+    accountController.logout
+)
+
+
 module.exports = router
 
