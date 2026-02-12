@@ -976,6 +976,135 @@ label[for="classificationList"] {
 .modal-delete:hover {
   background: #990000;
 }
+#update-account {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+#update-account section {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+}
+
+#update-account h2 {
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  color: #333;
+}
+
+/* Container */
+#account-management {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+/* Page title */
+#account-management h1 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+/* Greeting */
+#account-management h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #444;
+}
+
+/* Flash messages */
+.notice,
+.error {
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.notice {
+  background: #e6f4ea;
+  color: #276738;
+  border: 1px solid #b7dfc2;
+}
+
+.error {
+  background: #fdecea;
+  color: #b71c1c;
+  border: 1px solid #f5c6cb;
+}
+
+/* Link section */
+#account-management p {
+  margin-bottom: 1rem;
+}
+
+/* Turn links into buttons */
+#account-management a {
+  display: inline-block;
+  background: #0077cc;
+  color: white;
+  padding: 0.6rem 1rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+#account-management a:hover {
+  background: #005fa3;
+}
+
+/* Inventory section heading */
+#account-management h3 {
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.3rem;
+  color: #333;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form label {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.form input {
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.form input:focus {
+  border-color: #0077cc;
+  outline: none;
+  box-shadow: 0 0 4px rgba(0, 119, 204, 0.3);
+}
+
+.form button {
+  background: #0077cc;
+  color: white;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+.form button:hover {
+  background: #005fa3;
+}
+
 /* Responsive */
 @media (max-width: 720px) {
   #updateForm {
@@ -1047,5 +1176,11 @@ label[for="classificationList"] {
     padding: 8px 6px;
     border-bottom: none;
   }
+    #update-account {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
 }
 
