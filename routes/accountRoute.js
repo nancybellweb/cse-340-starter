@@ -16,18 +16,14 @@ router.post(
     "/register",
     regValidate.registationRules(),
     regValidate.checkRegData,
-    accountController.registerAccount
+    utilities.handleErrors(accountController.registerAccount)
 )
 router.post(
     "/login",
     utilities.handleErrors(accountController.loginAccount)
 )
 // Process the logout
-router.get("/logout", (req, res) => {
-    res.clearCookie("jwt")
-    req.flash("notice", "You have been logged out.")
-    res.redirect("/")
-})
+router.get("/logout", utilities.handleErrors(accountController.logout))
 
 // Route to account management view
 router.get(
@@ -35,6 +31,13 @@ router.get(
     utilities.checkLogin,
     utilities.handleErrors(accountController.buildUpdateAccount)
 )
+// Account Management view
+router.get(
+    "/",
+    utilities.checkLogin,
+    utilities.handleErrors(accountController.buildAccountManagement)
+)
+
 // Deliver update view
 router.get(
     "/update/:account_id",
@@ -46,8 +49,8 @@ router.get(
 router.post(
     "/update",
     utilities.checkLogin,
-    accountValidate.updateAccountRules(),
-    accountValidate.checkUpdateData,
+    regValidate.updateAccountRules(),
+    regValidate.checkUpdateData,
     utilities.handleErrors(accountController.updateAccount)
 )
 
@@ -55,8 +58,8 @@ router.post(
 router.post(
     "/update-password",
     utilities.checkLogin,
-    accountValidate.updatePasswordRules(),
-    accountValidate.checkPasswordData,
+    regValidate.updatePasswordRules(),
+    regValidate.checkPasswordData,
     utilities.handleErrors(accountController.updatePassword)
 )
 
@@ -64,7 +67,7 @@ router.post(
 router.get(
     "/logout",
     utilities.checkLogin,
-    accountController.logout
+    utilities.handleErrors(accountController.logout)
 )
 
 
