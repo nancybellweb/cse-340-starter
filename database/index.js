@@ -9,17 +9,11 @@ require("dotenv").config()
 let pool
 if (process.env.NODE_ENV == "development") {
     pool = new Pool({
-        connectionString: process.env.DATABASE_URL
-    })
-    } else {
-    // Production (Render)
-    pool = new Pool({
         connectionString: process.env.DATABASE_URL,
         ssl: {
-        rejectUnauthorized: false
-        }
-    })
-}
+        rejectUnauthorized: false,
+        },
+})
 
 // Added for troubleshooting queries
 // during development
@@ -34,15 +28,7 @@ module.exports = {
         throw error
         }
     },
-    async getClient() {
-        return await pool.connect()
-    }
 }
-if (process.env.NODE_ENV == "development") {
-    pool = new Pool({
-        connectionString: process.env.DATABASE_URL
-    })
-    module.exports = pool
 } else {
     pool = new Pool({
         connectionString: process.env.DATABASE_URL,
