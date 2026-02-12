@@ -29,6 +29,36 @@ router.get("/logout", (req, res) => {
     res.redirect("/")
 })
 
+// Route to account management view
+router.get(
+    "/update/:account_id",
+    utilities.checkLogin,
+    utilities.handleErrors(accountController.buildUpdateAccount)
+)
+// Deliver update view
+router.get(
+    "/update/:account_id",
+    utilities.checkLogin,
+    utilities.handleErrors(accountController.buildUpdateAccount)
+)
+
+// Process account info update
+router.post(
+    "/update",
+    utilities.checkLogin,
+    accountValidate.updateAccountRules(),
+    accountValidate.checkUpdateData,
+    utilities.handleErrors(accountController.updateAccount)
+)
+
+// Process password update
+router.post(
+    "/update-password",
+    utilities.checkLogin,
+    accountValidate.updatePasswordRules(),
+    accountValidate.checkPasswordData,
+    utilities.handleErrors(accountController.updatePassword)
+)
 
 module.exports = router
 

@@ -109,9 +109,31 @@ async function loginAccount(req, res) {
         throw new Error('Access Forbidden')
     }
 }
+async function buildAccountManagement(req, res) {
+    const nav = await utilities.getNav()
+    const accountData = res.locals.accountData
 
+    res.render("account/management", {
+        title: "Account Management",
+        nav,
+        accountData,
+        errors: null
+    })
+}
+async function buildUpdateAccount(req, res) {
+    const nav = await utilities.getNav()
+    const account_id = req.params.account_id
+    const accountData = await accountModel.getAccountById(account_id)
 
-module.exports = { buildLogin, buildRegister, registerAccount, loginAccount }
+    res.render("account/update", {
+        title: "Update Account",
+        nav,
+        accountData,
+        errors: null
+    })
+}
+
+module.exports = { buildLogin, buildRegister, registerAccount, loginAccount, buildAccountManagement, buildUpdateAccount }
 
 
 

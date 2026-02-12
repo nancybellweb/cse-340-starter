@@ -20,6 +20,7 @@ const flash = require('connect-flash')
 const accountRoute = require('./routes/accountRoute')
 const cookieParser = require("cookie-parser")
 
+
 /* ***********************
  * Middleware
  * ************************/
@@ -85,7 +86,6 @@ app.use("/account", accountRoute)
  *************************/
 app.get("/", utilities.handleErrors(baseController.buildHome))
 //checkJWTToken
-app.use(utilities.checkJWTToken)
 
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
