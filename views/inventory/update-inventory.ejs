@@ -7,10 +7,8 @@
 <form action="/inv/add-inventory" method="post" id="addInventoryForm">
 
     <label for="classification_id">Classification</label>
-    <select id="classification_id" name="classification_id" required>
-    <option value="">Choose a Classification</option>
+    <label for="classification_id">Choose a Classification</label>
     <%- classificationList %>
-    </select>
 
     <label for="inv_make">Make</label>
     <input type="text" id="inv_make" name="inv_make" required>

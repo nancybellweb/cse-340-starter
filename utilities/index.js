@@ -9,11 +9,12 @@ const Util = {}
  * Constructs the nav HTML unordered list
  * ************************** */
 Util.getNav = async function () {
+
     let data = await invModel.getClassifications()
     let list = "<ul>"
     list += '<li><a href="/" title="Home page">Home</a></li>'
-
     data.forEach((row) => {
+        console.log("NAV ROW:", row)
         list += "<li>"
         list +=
         '<a href="/inv/type/' +

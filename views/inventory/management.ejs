@@ -1,6 +1,6 @@
 <% locals.title = "Inventory Management" %>
 
-<main id="inventory-management">
+<div id="inventory-management">
 
     <h1>Inventory Management</h1>
 
@@ -17,11 +17,9 @@
     <h2>Manage Inventory</h2>
     <p> Select a classification to view inventory:</p>
     
-    <label for="classificationList">Choose a Classification</label>
-    <select id="classificationList" name="classification_id">
-    <option value="">Select a classification</option>
-            <%- classificationList %>
-    </select>
+    <label for="classification_id">Choose a Classification</label>
+    <%- classificationList %>
+
 
 
     <table id="inventoryDisplay"></table>
@@ -30,4 +28,4 @@
     <script src="/js/inventory.js"></script>
     <noscript>JavaScript must be enabled to use this page.</noscript>
 
-</main>
+</div>

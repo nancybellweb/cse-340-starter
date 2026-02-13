@@ -4,10 +4,8 @@
 <form action="/inv/update" method="post" id="updateForm">
 
     <label for="classificationList">Classification</label>
-    <select id="classification_id" name="classification_id" required>
-    <option value="">Choose a Classification</option>
-    <%- classificationSelect %>
-    </select>
+    <label for="classification_id">Choose a Classification</label>
+    <%- classificationList %>
     <label for="inv_make">Make</label>
     <input type="text" id="inv_make" name="inv_make" value="<%= inv_make %>" required>
 

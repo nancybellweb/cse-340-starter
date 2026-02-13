@@ -99,21 +99,6 @@ nav ul li a {
 }
 
 
-/* --- Desktop Styles (min-width 768px) --- */
-@media screen and (min-width: 768px) {
-  .info-cars {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 40px;
-  }
-
-  .upgrades-container, .reviews {
-    width: 50%;
-  }
-}
-
 /* --- Hero Section (Mobile First) --- */
 .hero-container {
     position: relative;
@@ -1114,6 +1099,17 @@ label[for="classificationList"] {
 }
 
 @media screen and (min-width: 600px) {
+  .info-cars {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+  }
+
+  .upgrades-container, .reviews {
+    width: 50%;
+  }
     .hero-details {
     position: absolute; 
     top: 50px;
