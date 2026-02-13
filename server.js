@@ -20,6 +20,8 @@ const flash = require('connect-flash')
 const accountRoute = require('./routes/accountRoute')
 const cookieParser = require("cookie-parser")
 
+//Serve static files from the "public" directory'
+app.use(express.static("public"))
 
 /* ***********************
  * Middleware
