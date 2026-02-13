@@ -15,7 +15,6 @@ const inventoryRoute = require("./routes/inventoryRoute")
 const app = express()
 const static = require("./routes/static")
 const session = require("express-session")
-const pool = require('./database/')
 const flash = require('connect-flash')
 const accountRoute = require('./routes/accountRoute')
 const cookieParser = require("cookie-parser")
@@ -28,8 +27,7 @@ app.use(express.static("public"))
  * ************************/
 app.use(session({
   store: new (require('connect-pg-simple')(session))({
-    createTableIfMissing: true,
-    pool,
+    createTableIfMissing: true
   }),
   secret: process.env.SESSION_SECRET,
   resave: false,           // Changed to false (standard for pg-simple)
