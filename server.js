@@ -18,6 +18,7 @@ const session = require("express-session")
 const flash = require('connect-flash')
 const accountRoute = require('./routes/accountRoute')
 const cookieParser = require("cookie-parser")
+const sellCarRoute = require('./routes/sellCarRoute')
 
 //Serve static files from the "public" directory'
 app.use(express.static("public"))
@@ -80,6 +81,9 @@ app.use("/inv", inventoryRoute)
 
 // Account routes
 app.use("/account", accountRoute)
+
+// Sell Car routes
+app.use("/sell-car", sellCarRoute)
 
 /* ***********************
  * Index route

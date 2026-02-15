@@ -1,0 +1,1 @@
+//Client side validation for the sell car page

@@ -10,10 +10,14 @@
     <p>
         <a href="/account/update/<%= accountData.account_id %>">Update Account Information</a>
     </p>
-
+        <!-- My Cars link (always visible) -->
+    <p>
+        <a href="/sell-car/my-cars">My Cars</a>
+    </p>
     <!-- Only show inventory management for Employee/Admin -->
     <% if (accountData.account_type === "Employee" || accountData.account_type === "Admin") { %>
         <h3>Inventory Management</h3>
         <p><a href="/inv/management">Manage Inventory</a></p>
+        <p><a href="/sell-car/admin">Customer Sell Car Requests</a></p>
     <% } %>     
 </main>
