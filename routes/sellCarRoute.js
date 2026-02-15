@@ -10,21 +10,21 @@ const sellCarValidate = require("../utilities/sell-car-validation")
     USER ROUTES (logged-in users)
 ============================ */
 
-// My Cars View - User's own sell car requests
+// My Cars View - User's own sell car requests - both active and past
 router.get(
     "/my-cars",
     utilities.checkLogin,
     utilities.handleErrors(sellCarController.buildMyCars)
 )
 
-// Sell Car Form View
+// Sell Car Form View - Form to submit a new sell car request
 router.get(
     "/",
     utilities.checkLogin,
     utilities.handleErrors(sellCarController.buildSellCarForm)
 )
 
-// Process Sell Car Request
+// Process Sell Car Request -   Handle form submission for a new sell car request, including validation and saving to the database
 router.post(
     "/submit",
     utilities.checkLogin,
@@ -37,7 +37,7 @@ router.post(
     ADMIN ROUTES (Employee/Admin only)
 ============================ */
 
-// Admin View - All Requests
+// Admin View - All Requests - View for employees/admins to see all sell car requests, with options to update status or delete requests
 router.get(
     "/admin",
     utilities.checkLogin,
@@ -45,7 +45,7 @@ router.get(
     utilities.handleErrors(sellCarController.buildAdminSellCarView)
 )
 
-// Update Request Status
+// Update Request Status - Handle status updates for sell car requests (e.g., marking as approved, rejected, or sold)
 router.post(
     "/admin/update-status",
     utilities.checkLogin,
@@ -53,7 +53,7 @@ router.post(
     utilities.handleErrors(sellCarController.updateRequestStatus)
 )
 
-// Delete Request
+// Delete Request - Handle deletion of sell car requests by employees/admins, including removing the request from the database and any associated data
 router.post(
     "/admin/delete",
     utilities.checkLogin,
