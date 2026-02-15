@@ -301,182 +301,134 @@ select:focus {
 }
 
 /*======================================
-  SELL CAR FORM
+  SELL CAR STYLES
 ======================================*/
 
+/* Error styling - matches your form style */
 .error-field {
-    border: 2px solid #d32f2f !important;
-    background-color: #ffebee !important;
+border: 2px solid red !important;
 }
 
 .error-notice {
-    background-color: #ffebee;
-    border: 2px solid #d32f2f;
-    color: #d32f2f;
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 5px;
+padding: 10px;
+margin-bottom: 15px;
+background: #ffebee;
+border-left: 4px solid red;
+color: red;
 }
 
-.error-notice ul {
-    margin: 0;
-    padding-left: 20px;
-}
-
-.error-notice li {
-    margin: 5px 0;
-}
+/* Admin table - matches your inventory table */
 .admin-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-.admin-table th,
-.admin-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-}
-
-.admin-table th {
-    background-color: #f2f2f2;
-    font-weight: bold;
-}
-
-.admin-table select {
-    padding: 5px;
-}
-
-.admin-table button {
-    padding: 5px 10px;
-    margin-left: 5px;
-    cursor: pointer;
-}
-/* Grid layout for car cards */
-.my-cars-grid {
-display: grid;
-grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-gap: 20px;
+width: 100%;
+border-collapse: collapse;
 margin-top: 20px;
 }
 
-/* Individual car card */
+.admin-table th {
+background: #f2f2f2;
+padding: 10px;
+text-align: left;
+}
+
+.admin-table td {
+padding: 10px;
+border-bottom: 1px solid #ddd;
+}
+
+.admin-table tr:hover {
+background: #f9f9f9;
+}
+
+.admin-table select {
+padding: 5px;
+border: 1px solid #ccc;
+border-radius: 4px;
+}
+
+.admin-table button {
+padding: 5px 10px;
+margin-left: 5px;
+background: #3a3a3a;
+color: white;
+border: none;
+cursor: pointer;
+border-radius: 4px;
+}
+
+.admin-table button:hover {
+background: #00d1f2;
+color: #3a3a3a;
+}
+
+/* My Cars page - simple cards */
+.my-cars-grid {
+margin-top: 20px;
+}
+
 .car-card {
-background: white;
 border: 1px solid #ddd;
-border-radius: 8px;
-padding: 20px;
-box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-transition: box-shadow 0.3s ease;
+border-radius: 6px;
+padding: 15px;
+margin-bottom: 20px;
+background: #fff;
 }
 
-.car-card:hover {
-box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
-/* Card header with title and status */
 .car-header {
-display: flex;
-justify-content: space-between;
-align-items: center;
+border-bottom: 2px solid #f2f2f2;
+padding-bottom: 10px;
 margin-bottom: 15px;
-padding-bottom: 15px;
-border-bottom: 2px solid #f0f0f0;
 }
 
 .car-header h3 {
 margin: 0;
-font-size: 1.3em;
-color: #333;
+color: #3a3a3a;
 }
 
-/* Status badges */
 .status-badge {
-padding: 5px 12px;
-border-radius: 20px;
-font-size: 0.8em;
+padding: 4px 10px;
+border-radius: 4px;
+font-size: 0.85em;
 font-weight: bold;
-text-transform: uppercase;
+float: right;
 }
 
-.status-pending {
-background-color: #fff3cd;
-color: #856404;
-}
-
-.status-contacted {
-background-color: #cce5ff;
-color: #004085;
-}
-
-.status-completed {
-background-color: #d4edda;
-color: #155724;
-}
-
-.status-declined {
-background-color: #f8d7da;
-color: #721c24;
-}
-
-/* Car details */
-.car-details {
-margin-bottom: 15px;
-}
+.status-pending { background-color: #fff3cd; color: #856404; }
+.status-contacted { background-color: #cce5ff; color: #004085; }
+.status-completed { background-color: #d4edda; color: #155724; }
+.status-declined { background-color: #f8d7da; color: #721c24; }
 
 .detail-row {
-display: flex;
-justify-content: space-between;
 padding: 8px 0;
 border-bottom: 1px solid #f5f5f5;
 }
 
 .detail-row .label {
-font-weight: 600;
-color: #666;
+font-weight: bold;
+color: #3a3a3a;
 }
 
-.detail-row .value {
-color: #333;
-}
-
-/* Description section */
 .car-description {
-margin: 15px 0;
-padding: 15px;
-background-color: #f9f9f9;
-border-radius: 5px;
-}
-
-.car-description p {
-margin: 5px 0 0 0;
-color: #555;
-line-height: 1.5;
-}
-
-/* Status info messages */
-.status-info {
 margin-top: 15px;
+padding: 10px;
+background-color: #f9f9f9;
+border-radius: 4px;
 }
 
 .status-message {
 padding: 10px;
-border-radius: 5px;
-background-color: #e7f3ff;
-color: #0056b3;
-font-size: 0.95em;
-margin: 0;
+margin-top: 15px;
+background: #e6f7fb;
+border-left: 4px solid #00d1f2;
 }
 
-/* No cars banner */
+/* No cars banner - matches your hero style */
 .no-cars-banner {
-background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-color: white;
-padding: 40px;
-border-radius: 12px;
+background: #00d1f2;
+color: #3a3a3a;
+padding: 30px;
 text-align: center;
 margin-top: 20px;
+border-radius: 6px;
 }
 
 .banner-content h2 {
@@ -484,45 +436,64 @@ margin-top: 0;
 }
 
 .sell-car-button {
-display: inline-block;
-background-color: white;
-color: #667eea;
-padding: 15px 40px;
-font-size: 1.1em;
-font-weight: bold;
+background-color: #3a3a3a;
+color: white;
+padding: 10px 30px;
 text-decoration: none;
-border-radius: 5px;
-transition: all 0.3s ease;
+display: inline-block;
+margin-top: 15px;
+border-radius: 4px;
+font-weight: bold;
 }
 
 .sell-car-button:hover {
-transform: translateY(-2px);
-box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+background: white;
+color: #3a3a3a;
+border: 2px solid #3a3a3a;
 }
 
 .banner-features {
 display: flex;
 justify-content: center;
-gap: 40px;
-margin-top: 30px;
+gap: 30px;
+margin-top: 20px;
 }
 
 .feature {
-display: flex;
-flex-direction: column;
-align-items: center;
-gap: 8px;
+text-align: center;
 }
 
 .feature .icon {
 font-size: 2em;
+display: block;
+margin-bottom: 5px;
 }
 
-.feature span:last-child {
-font-size: 0.95em;
-font-weight: 500;
+/* Account Management styling */
+#account-management p {
+margin: 10px 0;
 }
-  
+
+#account-management a {
+display: inline-block;
+padding: 10px 18px;
+background: #3a3a3a;
+color: #ffffff;
+text-decoration: none;
+border-radius: 4px;
+font-weight: bold;
+margin-right: 10px;
+}
+
+#account-management a:hover {
+background: #00d1f2;
+color: #3a3a3a;
+}
+
+#account-management h3 {
+margin-top: 30px;
+color: #3a3a3a;
+}
 
 /* =====================================
   TABLES
