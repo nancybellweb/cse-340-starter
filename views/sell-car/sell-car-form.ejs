@@ -1,0 +1,73 @@
+<h1>Sell Your Car</h1>
+
+<%- messages() %>
+
+<% if (errors) { %>
+    <ul class="notice">
+        <% errors.array().forEach(error => { %>
+        <li><%= error.msg %></li>
+        <% }) %>
+    </ul>
+<% } %>
+
+<p>Fill out the form below and our team will reach out to you soon with a quote!</p>
+
+<form action="/sell-car/submit" method="post" id="sellCarForm" novalidate>
+
+    <label for="classification_id">Classification</label>
+    <label for="classification_id">Choose a Classification</label>
+    <%- classificationList %>
+
+    <label for="car_make">Make</label>
+    <input type="text" id="car_make" name="car_make" value="<%= locals.car_make || '' %>" required>
+
+    <label for="car_model">Model</label>
+    <input type="text" id="car_model" name="car_model" value="<%= locals.car_model || '' %>" required>
+
+    <label for="car_year">Year</label>
+    <input type="number" id="car_year" name="car_year" min="1900" max="2100" value="<%= locals.car_year || '' %>" required>
+
+    <label for="car_description">Description</label>
+    <textarea id="car_description" name="car_description" required><%= locals.car_description || '' %></textarea>
+
+    <label for="asking_price">Asking Price</label>
+    <input type="number" id="asking_price" name="asking_price" min="0" step="0.01" value="<%= locals.asking_price || '' %>" required>
+
+    <label for="car_miles">Miles</label>
+    <input type="number" id="car_miles" name="car_miles" min="0" value="<%= locals.car_miles || '' %>" required>
+
+    <label for="car_color">Color</label>
+    <input type="text" id="car_color" name="car_color" value="<%= locals.car_color || '' %>" required>
+
+    <label for="contact_phone">Phone Number</label>
+    <input type="tel" id="contact_phone" name="contact_phone" placeholder="(123) 456-7890" value="<%= locals.contact_phone || '' %>" required>
+
+    <button type="submit">Submit Request</button>
+</form>
+
+<style>
+    .error-field {
+        border: 2px solid #d32f2f !important;
+        background-color: #ffebee !important;
+    }
+    
+    .error-notice {
+        background-color: #ffebee;
+        border: 2px solid #d32f2f;
+        color: #d32f2f;
+        padding: 15px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+    }
+    
+    .error-notice ul {
+        margin: 0;
+        padding-left: 20px;
+    }
+    
+    .error-notice li {
+        margin: 5px 0;
+    }
+</style>
+
+<script src="/js/sell-car-validation.js"></script>
