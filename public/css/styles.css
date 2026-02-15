@@ -480,14 +480,7 @@ margin-top: 20px;
 }
 
 .banner-content h2 {
-font-size: 2em;
-margin-bottom: 15px;
-}
-
-.banner-content p {
-font-size: 1.2em;
-margin-bottom: 25px;
-opacity: 0.95;
+margin-top: 0;
 }
 
 .sell-car-button {
@@ -507,7 +500,6 @@ transform: translateY(-2px);
 box-shadow: 0 5px 20px rgba(0,0,0,0.3);
 }
 
-/* Banner features */
 .banner-features {
 display: flex;
 justify-content: center;
