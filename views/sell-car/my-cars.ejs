@@ -1,0 +1,98 @@
+<%# This is the "My Cars" page for users to view their listed cars for sale. It displays each car's details and status, and shows a banner if no cars are listed. %>
+
+<h1>My Cars</h1>
+
+<%- messages() %> <%# Display any flash messages (success, error, etc.) %>
+
+<% if (requests && requests.length > 0) { %>
+<p>You have <%= requests.length %> car<%= requests.length > 1 ? 's' : '' %> listed for sale.</p>
+
+<%# Loop through each car request and display its details in a card format. The status of each request is highlighted with a badge, and additional information is provided based on the status. %>
+<div class="my-cars-grid">
+<% requests.forEach(request => { %>
+    <div class="car-card">
+    <div class="car-header">
+        <h3><%= request.car_year %> <%= request.car_make %> <%= request.car_model %></h3>
+        <span class="status-badge status-<%= request.status %>"><%= request.status.toUpperCase() %></span>
+    </div>
+    
+    <div class="car-details">
+        <div class="detail-row">
+        <span class="label">Classification:</span>
+        <span class="value"><%= request.classification_name %></span>
+        </div>
+        
+        <div class="detail-row">
+        <span class="label">Color:</span>
+        <span class="value"><%= request.car_color %></span>
+        </div>
+        
+        <div class="detail-row">
+        <span class="label">Miles:</span>
+        <span class="value"><%= Number(request.car_miles).toLocaleString() %> miles</span>
+        </div>
+        
+        <div class="detail-row">
+        <span class="label">Asking Price:</span>
+        <span class="value">$<%= Number(request.asking_price).toLocaleString('en-US', {minimumFractionDigits: 2}) %></span>
+        </div>
+        
+        <div class="detail-row">
+        <span class="label">Contact Phone:</span>
+        <span class="value"><%= request.contact_phone %></span>
+        </div>
+        
+        <div class="detail-row">
+        <span class="label">Submitted:</span>
+        <span class="value"><%= new Date(request.request_date).toLocaleDateString() %></span>
+        </div>
+    </div>
+    
+    <div class="car-description">
+        <strong>Description:</strong>
+        <p><%= request.car_description %></p>
+    </div>
+    <%# Display additional status information based on the current status of the request. This provides users with more context about where their request stands in the process. %>
+
+    <div class="status-info">
+        <% if (request.status === 'pending') { %>
+        <p class="status-message">⏳ Your request is being reviewed. We'll contact you soon!</p>
+        <% } else if (request.status === 'contacted') { %>
+        <p class="status-message">📞 We've reached out! Check your phone and email.</p>
+        <% } else if (request.status === 'completed') { %>
+        <p class="status-message">✅ This request has been completed. Thank you!</p>
+        <% } else if (request.status === 'declined') { %>
+        <p class="status-message">❌ Unfortunately, we couldn't proceed with this request.</p>
+        <% } %>
+    </div>
+    </div>
+<% }) %>
+</div>
+
+<% } else { %>
+<!-- No cars listed - Show banner -->
+<div class="no-cars-banner">
+<div class="banner-content">
+    <h2> Would You Like to Sell Your Car?</h2>
+    <p>Get a competitive quote from CSE Motors today! Fill out our simple form and our team will reach out with an offer.</p>
+    <a href="/sell-car" class="sell-car-button">Sell Your Car Now</a>
+</div>
+<%# The banner features highlight the benefits of selling with CSE Motors, such as a quick process, fair prices, and an expert team to assist sellers. This encourages users to take action and list their cars for sale. %>
+
+<div class="banner-features">
+    <div class="feature">
+    <span class="icon">⚡</span>
+    <span>Quick Process</span>
+    </div>
+    <div class="feature">
+    <span class="icon">💰</span>
+    <span>Fair Prices</span>
+    </div>
+    <div class="feature">
+    <span class="icon">🤝</span>
+    <span>Expert Team</span>
+    </div>
+</div>
+</div>
+<% } %>
+
