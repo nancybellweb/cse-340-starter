@@ -56,13 +56,13 @@
 
     <div class="status-info">
         <% if (request.status === 'pending') { %>
-        <p class="status-message">⏳ Your request is being reviewed. We'll contact you soon!</p>
+        <p class="status-message">Your request is being reviewed. We'll contact you soon!</p>
         <% } else if (request.status === 'contacted') { %>
-        <p class="status-message">📞 We've reached out! Check your phone and email.</p>
+        <p class="status-message">We've reached out! Check your phone and email.</p>
         <% } else if (request.status === 'completed') { %>
-        <p class="status-message">✅ This request has been completed. Thank you!</p>
+        <p class="status-message">This request has been completed. Thank you!</p>
         <% } else if (request.status === 'declined') { %>
-        <p class="status-message">❌ Unfortunately, we couldn't proceed with this request.</p>
+        <p class="status-message">Unfortunately, we couldn't proceed with this request.</p>
         <% } %>
     </div>
     </div>
@@ -81,15 +81,12 @@
 
 <div class="banner-features">
     <div class="feature">
-    <span class="icon">⚡</span>
     <span>Quick Process</span>
     </div>
     <div class="feature">
-    <span class="icon">💰</span>
     <span>Fair Prices</span>
     </div>
     <div class="feature">
-    <span class="icon">🤝</span>
     <span>Expert Team</span>
     </div>
 </div>
